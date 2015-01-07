@@ -225,11 +225,11 @@ $(document).ready( function() {
 		    aSprockets2.unshift("00");
 	    }
 	}
-	cadence = ( paramTF !== null )? paramTF : cadence;
+	cadence = Number(( paramTF !== null )? paramTF : cadence);
 	circumference = ( paramUF !== null )? paramUF : circumference;
 	circumference2 = ( paramUF2 !== null )? paramUF2 : circumference;
 	dsplOps.siUnits = (paramUN !== null)? (paramUN === "KMH") : (navigator.language !== "en"); 
-	dsplOps.maxChainAngle = ( paramSL !== null )? paramSL : dsplOps.maxChainAngle;
+	dsplOps.maxChainAngle = Number(( paramSL !== null )? paramSL : dsplOps.maxChainAngle);
 	hubType = ( paramGR !== null )? hubTypes.getById(paramGR) : hubTypes[0];
 	hubType2 = ( paramGR2 !== null )? hubTypes.getById(paramGR2) : hubTypes[0];
 	//hubType = hubTypes[0];
