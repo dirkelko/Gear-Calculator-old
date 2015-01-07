@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1">
+    <meta name="keywords" content="Ritzelrechner, Entfaltungsrechner,gear calculator,bicycle">
+    <meta name="description" content="Graphical gear calculator for bicycle gearing systems. Includes derailleur gears and internal gear hubs.
+    Grafischer Ritzelrechner zur Berechnung der Entfaltung von Fahrradschaltungen.">
+    <title>HTML5 Gear Calculator</title>
+  	<link type="text/css" rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"/>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="lib/jquery/jquery.ui.touch-punch.min.js"></script>
+    <script type="text/javascript" src="lib/l10n.js"></script>
+    <script type="text/javascript" src="localization.js"></script>
+    <link type="text/css" rel="stylesheet" href="stylesheet.css"/>
+    <script type="text/javascript" src="graphics.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+
+</head>
+
+<body>
+	
+ 	<div id="canvasArea" class="outerArea">
+     	<figure>
+        	<canvas id="myCanvas" height="240px">Fallback content, in case the browser does not support Canvas.</canvas>
+        	<!--figcaption>Works in Firefox 3+, Safari 3.1+, Chrome 2+ and Opera 9.6+)</figcaption-->
+    	</figure>
+     	<figure>
+        	<canvas id="myCanvas2" height="240px">Fallback content, in case the browser does not support Canvas.</canvas>
+        	<!--figcaption>Works in Firefox 3+, Safari 3.1+, Chrome 2+ and Opera 9.6+)</figcaption-->
+    	</figure>
+ 	</div>
+ 	
+ 	<div id="controlArea" class="outerArea">
+ 		<div id="cwselection" class="ringselection">
+    		<div class="Chainring" id="cw1"><div class="nTeeth"> </div></div>
+    		<div class="Chainring" id="cw2"><div class="nTeeth"> </div></div>
+    		<div class="Chainring" id="cw3"><div class="nTeeth"> </div></div>
+    		<div id="cwScale" class="scale"> </div>
+        </div>
+ 		<div id="spselection" class="ringselection">
+    		<div class="sprocket" id="sp01"><div class="nTeeth"> </div></div>
+    		<div class="sprocket" id="sp02"><div class="nTeeth"> </div></div>
+    		<div class="sprocket" id="sp03"><div class="nTeeth"> </div></div>
+    		<div class="sprocket" id="sp04"><div class="nTeeth"> </div></div>
+    		<div class="sprocket" id="sp05"><div class="nTeeth"> </div></div>
+    		<div class="sprocket" id="sp06"><div class="nTeeth"> </div></div>
+    		<div class="sprocket" id="sp07"><div class="nTeeth"> </div></div>
+    		<div class="sprocket" id="sp08"><div class="nTeeth"> </div></div>
+    		<div class="sprocket" id="sp09"><div class="nTeeth"> </div></div>
+    		<div class="sprocket" id="sp10"><div class="nTeeth"> </div></div>
+    		<div class="sprocket" id="sp11"><div class="nTeeth"> </div></div>
+    		<div id="spScale" class="scale"> </div>
+        </div>
+ 	</div>
+ 
+    <div id="calcControls" class="outerArea">
+        <div id="column1" class="threeColumns">
+			<div id="GearingTypeSelect" class="control">
+				<!-- h4>DropDowns</h4-->
+				<label id="l_gearing">Gearing</label>
+				<select id="selectBoxGearingType" class="selector">
+					<!-- will be filled by data from data.json -->
+				</select>
+			</div>
+			<div id="ChainringSelect" class="control">
+				<!-- h4>DropDowns</h4-->
+				<label id="l_chainrings">Chainrings</label>
+				<select id="selectBoxChainrings" class="selector">
+					<!-- will be filled by data from data.json -->
+				</select>
+			</div>
+			<div id="SprocketSelect" class="control">
+				<label id="l_sprockets">Sprockets</label>
+				<select id="selectBoxSprockets" class="selector">
+					<!-- will be filled by data from data.json -->
+				</select>
+			</div>
+		</div><div id="column2" class="threeColumns">
+			<div id="ringDropDownArea2" class="control">
+				<!-- h4>DropDowns2</h4-->
+				<label id="l_wheel_size">Wheel Size</label>
+			    <input type="text" id="inputCircumference" name="fname" class="textInput">
+				<select id = "selectWheelSize" class="selector">
+				    <!-- will be filled by data from data.json -->
+			    </select>
+			</div>
+			<div id="displaySelect" class="control">
+				<!-- h4>DropDowns</h4-->
+				<label id="l_display">Display</label>
+				<select id="selectDisplay" class="selector">
+                    <option id="o_teeth" value="teeth">Teeth</option>
+                    <option id="o_development" value="development">Development</option>
+                    <option id="o_ratio" value="ratio">Ratio</option>
+                    <option id="o_speed" value="speed">Speed</option>
+				</select>
+			</div>
+			<div id="radioButtonArea" class="control">
+				<label id="l_units">Units</label>
+                <div id="radio" class="radioButtons">
+                    <input id="unitKmh" type="radio" name="units" value="kmh">
+                    <label for="unitKmh">km/h</label>
+                    <input id="unitMph" type="radio" name="units" value="mph">
+                    <label for="unitMph">mph</label>
+                </div>
+            </div>
+		</div><div id="column3" class="threeColumns">
+			<div id ="cadenceSliderArea" class="control">
+				<!-- h4> Cadence </h4-->
+				<label id="l_cadence">Cadence</label><label id="cadenceValue"></label>
+				<div id="cadenceSlider" class="slider"> </div>
+			</div>
+			<div id="chainLineSliderArea" class="control">
+				<!-- h4> Allowed Chain Angle </h4-->
+				<label id="l_chain_angle">Chain Angle &lt;</label><label id="chainAngleValue"></label>
+				<div id="chainLineSlider" class="slider"> </div>
+			</div>
+			<div class="control">
+                <button id="buttonCompare" type="Button" class="compButton">
+                Compare two Setups</button>
+            </div>
+		</div>
+    <div id="urlArea" class="oneColumn">
+			<div id="ringDropDownArea3" class="control">
+			    <!-- h4>DropDowns2</h4-->
+			    <label>URL</label>
+			    <input type="text" id="inputURL" name="url" class="textInput">
+			</div>
+        
+    </div>
+    </div>
+ 	<!--div id="footer">
+ 		Footer
+ 	</div-->
+ 	
+</body>
+</html>

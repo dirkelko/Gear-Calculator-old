@@ -1,0 +1,336 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+}
+
+body{
+    background-color: #ddd;
+    /*width: 1024px;*/
+    height: 100%;
+    padding: 0px;
+    margin: 0;
+}
+div {
+	color: #FFFFFF;
+	/*font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;*/
+	font-family: Arial, sans-serif;
+	font-size: medium;
+	padding: 0px;
+	margin: 0px;
+}
+
+.outerArea {
+	/*position: relative;*/
+	width: 1024px;
+	height: auto;
+	color: #FFFFFF;
+	background-color: #bbb;
+	margin: auto;
+	padding: 10px;
+	/*outline: 1px solid #00FFFF;*/
+}
+
+#calcControls{
+	height: 200px;
+}
+
+.innerArea {
+	display:inline-block;
+	-moz-box-sizing:border-box; /* Firefox */
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;	
+	width: 33.333%;
+	height: 100%;
+	float:left;
+	color: #FFFFFF;
+	background-color: #abb9bf;
+	margin: 0px;
+	padding: 0px;
+	/*border: 1px solid #FFFFFF;*/
+	/*border-radius: 5px;*/
+}
+
+.control{
+	box-sizing:border-box;	
+	/*border: 1px solid #00ffff;*/
+	width:100%;
+	height: 20%;
+	float:none;
+	border-box: 2px;
+	/*border-bottom: 1px solid #FFFFFF;*/
+}
+
+figure {
+	border: none;
+	margin: 0px
+}
+#canvasArea {
+	/*border: 1px dashed #000000;*/
+	width: 1024px;
+	background: ffffff;
+}
+
+#myCanvas {
+	/*border: 1px dashed #FF0000;*/
+	position: relative;
+	margin: 0px;
+	width: 1004px;
+	height: 240px;
+	/*outline: 1px solid #FF0000;*/
+	/*background-color: #ff0000;*/
+}
+#myCanvas2 {
+	/*border: 1px dashed #FF0000;*/
+	position: relative;
+	display: none;
+	top: -245px;
+	margin: 0px;
+	width: 1004px;
+	height: 240px;
+	/*background-color: #ff0000;*/
+}
+#header {
+	text-align:center;
+	width: 1024px;
+	margin: 0px;
+	/*border: 1px dashed #FF0000;*/
+}
+
+.ringselection { 
+	position: relative;
+	width: 995px; /* 1024 - 5 margin*/
+	height: 50px;
+	border: none;
+	border-radius: 0px;
+	/*background-color: #CCCCCC;*/
+	margin-left: 5px;
+	
+}
+
+.Chainring {
+	position:absolute;
+	/*border-radius: 100%;*/
+	/*width: auto;*/
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+	z-index: 2;
+	border: none;
+	margin: 0px;
+	background-color: transparent;
+	text-shadow: 3px 3px 4px #444;
+	background-image: url('images/Chainring.png');
+	background-size: 50px 50px;
+	/*-moz-box-shadow: 10px 10px 5px #888;
+	-webkit-box-shadow: 10px 10px 5px #888;
+	box-shadow: 5px 5px 5px #888;*/
+}
+.sprocket {
+	position:absolute;
+	/*width: auto;*/
+	/*border-radius: 100%;*/
+	width: 50px;
+	height: 50px;
+	cursor:pointer;
+	z-index: 2;
+	border: none;
+	margin: 0px;
+	background-color: transparent;
+	text-shadow: 3px 3px 4px #444;
+	background-image: url('images/Sprocket.png');
+	background-size: 50px 50px;
+}
+
+.Chainring .nTeeth {
+	position: absolute;
+	top: 14px;
+	left: 0px;
+	width: 50px;
+	height: 50px;
+	z-index: 3;
+	border: none;
+	cursor:inherit;
+	font-weight: bold;
+	font-size: 120%;
+	text-align: center;	
+	background-color: transparent;
+	/*text-shadow: 3px 3px 4px #777;*/
+}
+
+.sprocket .nTeeth {
+	position: absolute;
+	top: 14px;
+	left: 0px;
+	width: 50px;
+	height: 50px;
+	z-index: 3;
+	border: none;
+	cursor:inherit;
+	font-weight: bold;
+	font-size: 120%;
+	text-align: center;	
+	background-color: transparent;
+	/*text-shadow: 3px 3px 4px #777;*/
+}
+
+.scale {
+	position:relative;
+	top: 0px;
+	height: 50px;
+	width: 920px;
+	border: none;
+	/*border: 1px dashed #000000;*/
+	border-radius: 0px;
+	left: 75px;
+	margin: 0px;
+}
+
+.scaleTick {
+	position: absolute;
+	height: 15px;
+	width: 3px;
+	border: none;
+	background-color: #FFFFFF;
+	margin: 0px;
+
+}
+
+/*#cadenceSlider {
+	position: relative;
+	width: 100px;
+	height: 14px;	
+}*/
+
+.threeColumns{
+    /*outline: 1px solid #FFF000;*/
+    display: inline-block;
+    vertical-align: top;
+    width: 33.3%;
+    /*background-color: #CCCCCC;*/
+    padding: 10px;
+}
+
+.oneColumn{
+    /*outline: 1px solid #FFF000;*/
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    /*background-color: #CCCCCC;*/
+    padding: 10px;
+}
+
+.control{
+    /*outline: 1px solid #AAAAAA;*/
+    height: 36px;
+}
+
+.selector{
+    float: right;
+    right: 0px;
+    width: 60%;
+}
+
+label{
+    /*float: left;*/
+}
+
+.slider{
+    float: right;
+    width: 45%;
+}
+
+.radioButtons{
+    float: right;
+    width: 45%;
+}
+
+#cadenceValue{
+    padding: 0 0 0 55px;
+}
+#chainAngleValue{
+    padding: 0 0 0 5px;
+}
+.ui-slider {
+	position: relative;
+	text-align: left;
+	height: 14px;
+	width: 45%;
+	/*background-color:#6D838E;*/
+	bottom: 0px;
+	border: 1px solid #FFFFFF;
+	background: #888888;
+  	/*background: -webkit-linear-gradient(top, #555, #999);
+  	/* Firefox 3.6+ */
+  	/*background: -moz-linear-gradient(top, #555, #999);*/
+  	float: right;
+  	margin: 4px 0px 0px 0px;
+}
+.ui-slider .ui-slider-handle {
+	position: absolute;
+	z-index: 2;
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+	background-color: #CCCCCC;
+	border: 1px solid #FFFFFF;
+	border-radius: 100%;
+	box-shadow: 2px 3px 5px #444;
+	/*bottom: 10px;*/
+}
+
+#inputCircumference{
+    float: right;
+    width: 20%;
+}
+#selectWheelSize{
+    width: 40%;
+    height: 24px;
+}
+#inputURL{
+    float: right;
+    width: 87.2%;
+}
+#buttonCircumference{
+    float: right;
+    width: 15%;
+}
+select {
+	background-color:#888888;
+	font-family: Arial, sans-serif;-family: Courier;
+	font-weight: 100;
+	font-size:medium;
+	color: #FFFFFF;
+	outline: 1px solid #FFFFFF;
+	border: none;
+	margin: 0px;
+}
+
+button{
+	background-color:#AAAAAA;
+	font-family: Arial, sans-serif;-family: Courier;
+	/*font-weight: bold;*/
+	font-size:medium;
+	color: #FFFFFF;
+	border: 0px;
+	outline: 1px solid #FFFFFF;
+	height: 22px;
+}
+
+#buttonCompare{
+    width: 100%;
+}
+.textInput{
+	margin: 0px;
+	background-color:#888888;
+	font-family: Arial, sans-serif;-family: Courier;
+	font-weight: 100;
+	outline: 1px solid #FFFFFF;
+	font-size:medium;
+	color: #ffffff;
+	border: none;
+	height: 22px;
+	padding: 0px 10px 0px 10px;
+}
+
