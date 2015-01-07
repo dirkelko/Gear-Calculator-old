@@ -147,16 +147,21 @@ $(document).ready( function() {
 	var scaleLeft = parseInt($(".scale").css("left"),10);
 	var scaleWidth = parseInt($(".scale").css("width"),10) - 25;
 
-	// paint the ticks for the scale of selectable Sprockets and chainrings (divs added to the scale areas)
+	// paint the ticks for the scale of selectable Sprockets and chainrings (divs added to the #cwScale and #spScale)
 	for ( var it=0; it<= nSelectableChainrings; it++) {
-		var xTick = (it*scaleWidth/nSelectableChainrings - 2);
-		$("#cwScale").append('<div class="scaleTick" style="left:' + xTick + 'px"></div>');
-		//$("#cwScale div:nth-child(" + it + ")").css( "left", xTick );
-	}
-
+        $('<div/>', {
+            'class':'scaleTick',
+            'style':'left:' + Math.round(it*scaleWidth/nSelectableChainrings - 2) + 'px',
+            }).appendTo('#cwScale');
+    }
 	for ( it=0; it<= nSelectableSprockets; it++) {
-		xTick = it*scaleWidth/nSelectableSprockets - 2;
-		$("#spScale").append('<div class="scaleTick" style="left:' + xTick + 'px"></div>');
+	    $('<div/>', {
+	        'class':'scaleTick',
+	        'id':'test',
+	        'style':'left:' + Math.round(it*scaleWidth/nSelectableSprockets -2) + 'px',
+	    }).appendTo('#spScale');
+		//xTick = it*scaleWidth/nSelectableSprockets - 2;
+		//$("#spScale").append('<div class="scaleTick" style="left:' + xTick + 'px"></div>');
 		//$("#spScale div:nth-child(" + it + ")").css( "left", xTick );
 	}
 
@@ -250,7 +255,7 @@ $(document).ready( function() {
 		//position Chainrings/Sprockets and place empty Chainrings/sprockets to position left=0 
 		for ( var i = 1; i <= chainrings.length; i++) {
 			var animation = {};
-			animation.left = (chainrings[i-1]>0)? (chainrings[i-1]-nMinChainringTeeth)*scaleWidth/nSelectableChainrings + scaleLeft -25 : 0 ;
+			animation.left = (chainrings[i-1]>0)? Math.round((chainrings[i-1]-nMinChainringTeeth)*scaleWidth/nSelectableChainrings + scaleLeft -25 ) : 0 ;
 			if (animate){
 				$(".Chainring:nth-child(" + i + ")").animate( animation );
 			} else {
@@ -264,7 +269,7 @@ $(document).ready( function() {
 	function positionSprockets(sprockets, animate){
 		for ( var i = 1; i <= sprockets.length; i++) {
 			var animation = {};
-			animation.left = ( sprockets[i-1]>0)? (sprockets[i-1]-nMinSprocketTeeth)*scaleWidth/nSelectableSprockets + scaleLeft -25 : 0;
+			animation.left = ( sprockets[i-1]>0)? Math.round((sprockets[i-1]-nMinSprocketTeeth)*scaleWidth/nSelectableSprockets + scaleLeft -25 ) : 0;
 			if (animate) {
 				$(".sprocket:nth-child(" + i + ")").animate( animation );
 			} else {
@@ -277,14 +282,7 @@ $(document).ready( function() {
 
 	// make the Chainrings movable
 	$(".Chainring").draggable({ axis: "x", containment: "parent" });
-	// paint the ticks for the scale of selectable Chainrings
-	for ( i=0; i<= nSelectableChainrings; i++) {
-		var xTick = i*scaleWidth/nSelectableChainrings - 2;
-		$("#cwScale").append('<div class="scaleTick"></div>');
-		$("#cwScale div:nth-child(" + i + ")").css( "left", xTick );
-	}
-	
-	
+
 	// draw graphics in canvas element
 	var canvas = $("#myCanvas")[0]; //[0] gets the first element from the selector's collection
 	if (canvas.getContext){
@@ -373,7 +371,7 @@ $(document).ready( function() {
 		//var iChainring = $(this).attr("id").substring(2,3) - 1 ;
 		//move ring to the nearest tick or place on left side
 		if ( nTick >= 0){
-			$(this).css("left", nTick*scaleWidth/nSelectableChainrings + scaleLeft -25);
+			$(this).css("left", Math.round(nTick*scaleWidth/nSelectableChainrings + scaleLeft -25));
 			$(this).children("div").html(nTick + nMinChainringTeeth);
 		} else {
 			$(this).css("left", 0 );
@@ -383,13 +381,7 @@ $(document).ready( function() {
 	
 	// make the Sprockets movable
 	$(".sprocket").draggable({ axis: "x", containment: "parent" });
-	// paint the ticks for the scale of selectable Sprockets
-	for ( i=0; i<= nSelectableSprockets; i++) {
-		xTick = i*scaleWidth/nSelectableSprockets - 2;
-		$("#spScale").append('<div class="scaleTick"></div>');
-		$("#spScale div:nth-child(" + i + ")").css( "left", xTick );
-	}
-	
+
 	// event handler while dragging a Sprocket
 	$(".sprocket").on( "drag", function( event, ui ) {
 		// calculate nearest tick on scale
@@ -440,7 +432,7 @@ $(document).ready( function() {
 		//var iSprocket = $(this).attr("id").substring(2,4) - 1 ;
 		//move ring to the nearest tick or place on left side
 		if ( nTick >= 0){
-			$(this).css("left", nTick*scaleWidth/nSelectableSprockets + scaleLeft -25 );
+			$(this).css("left", Math.round(nTick*scaleWidth/nSelectableSprockets + scaleLeft -25) );
 			$(this).children("div").html(nTick + nMinSprocketTeeth );
 		} else {
 			$(this).css("left", 0 );
