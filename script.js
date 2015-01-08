@@ -142,6 +142,7 @@ $(document).ready( function() {
     document.getElementById("o_development").firstChild.nodeValue = "%development".toLocaleString();
     document.getElementById("o_ratio").firstChild.nodeValue = "%ratio".toLocaleString();
     document.getElementById("o_speed").firstChild.nodeValue = "%speed".toLocaleString();
+    $("#mail").html("%mail".toLocaleString());
 
     $("#buttonCompare").attr("title", "%tt_compare".toLocaleString());
     $("#mail").attr("title", "%tt_mail".toLocaleString());
