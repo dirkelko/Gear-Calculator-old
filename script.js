@@ -34,8 +34,8 @@ var hubTypes = [];
         };
 
 
-var circumference = "2100";
-var circumference2 = "2100";
+var circumference = "2125";
+var circumference2 = "2125";
 var cadence = 90;
 var distSprockets = [5.5, 5.5, 5.5, 5.5, 5.3, 5.0, 5.0, 4.8, 4.34, 3.95, 3.9]; //distance/mm between sprockets 
 var distChainrings = 5.0;
