@@ -21,13 +21,15 @@ div {
 	margin: 0px;
 }
 
+#outerFrame{
+	width: 1024px;
+	margin: auto;
+	background-color: #bbb;
+}
 .outerArea {
 	/*position: relative;*/
-	width: 1024px;
 	height: auto;
 	color: #FFFFFF;
-	background-color: #bbb;
-	margin: auto;
 	padding: 10px;
 	/*outline: 1px solid #00FFFF;*/
 }
@@ -331,6 +333,22 @@ button{
 	color: #ffffff;
 	border: none;
 	height: 22px;
-	padding: 0px 10px 0px 10px;
+	padding: 0 10px 0 10px;
 }
 
+#footer{
+    height: 20px;
+    padding: 0 10px 0 10px;
+}
+
+#copy {
+    float: left;
+    font-weight: 100;
+    font-size: small;
+}
+
+#mail {
+    float: right;
+    font-weight: 100;
+    font-size: small;
+}

@@ -126,12 +126,11 @@ function drawBothGraphics(canvas, canvas2, gearSet, gearSet2, cadence, dsplOps) 
 // Document ready for initializing the screen and defining the event handlers using jQuery 
 $(document).ready( function() {	
 	
-    // Localization of HTML elements with l10n.js library and localization.js file
+    // Localization of HTML elements and tooltips with l10n.js library and localization.js file
     document.getElementById("l_gearing").firstChild.nodeValue = "%gearing".toLocaleString();
     document.getElementById("l_chainrings").firstChild.nodeValue = "%chainrings".toLocaleString();
     document.getElementById("l_sprockets").firstChild.nodeValue = "%sprockets".toLocaleString();
     document.getElementById("l_wheel_size").firstChild.nodeValue = "%wheel_size".toLocaleString();
-    //document.getElementById("l_circumference").firstChild.nodeValue = "%circumference".toLocaleString();
     document.getElementById("l_display").firstChild.nodeValue = "%display".toLocaleString();
     document.getElementById("l_cadence").firstChild.nodeValue = "%cadence".toLocaleString();
     document.getElementById("l_chain_angle").firstChild.nodeValue = "%chain_angle".toLocaleString();
@@ -142,6 +141,16 @@ $(document).ready( function() {
     document.getElementById("o_ratio").firstChild.nodeValue = "%ratio".toLocaleString();
     document.getElementById("o_speed").firstChild.nodeValue = "%speed".toLocaleString();
 
+    $("#buttonCompare").attr("title", "%tt_compare".toLocaleString());
+    $("#mail").attr("title", "%tt_mail".toLocaleString());
+    $(".sprocket").attr("title", "%tt_moveSp".toLocaleString());
+    $(".Chainring").attr("title", "%tt_moveCw".toLocaleString());
+    $("#selectWheelSize").attr("title", "%tt_wheel_size".toLocaleString());
+    $("#inputCircumference").attr("title", "%tt_wheel_size".toLocaleString());
+    $("#chainLineSlider").attr("title", "%tt_chain_angle".toLocaleString());
+    $("#buttonCompare").attr("title", "%tt_compare".toLocaleString());
+    $("#buttonCompare").attr("title", "%tt_compare".toLocaleString());
+    $("#inputURL").attr("title", "%tt_url".toLocaleString());
 
 	// get size and location of scale for cw and spr selection
 	var scaleLeft = parseInt($(".scale").css("left"),10);
@@ -191,7 +200,7 @@ $(document).ready( function() {
 					//define array with description and data of hub types from json file
 					var data = val[i].data.split(',');
 					var ratios = data.slice(3,data.length);
-					var hub = { id:val[i].id.toString(), minRatio:data.slice(0,1).toString(), chainWheel:data.slice(1,2).toString(), 
+					var hub = { id:val[i].id.toString(), minRatio:data.slice(0,1).toString(), chainRing:data.slice(1,2).toString(), 
 					    sprocket:data.slice(2,3).toString(), ratios:ratios, name:val[i].name};
 					hubTypes[hubTypes.length] = hub;
 					//console.log('<option value="' + val[i].id + ',' + val[i].data + '">' + val[i].name + '</option>');
@@ -489,7 +498,7 @@ $(document).ready( function() {
 			aChainrings2 = aChainrings.slice(0);
 			aSprockets2 = aSprockets.slice(0);
 			circumference2 = circumference;
-			hubType2 = {id:hubType.id, ratios:hubType.ratios, chainWheel:hubType.chainWheel, sprocket:hubType.sprocket, name:hubType.name};
+			hubType2 = {id:hubType.id, ratios:hubType.ratios, chainRingl:hubType.chainRing, sprocket:hubType.sprocket, name:hubType.name};
 			// draw second canvas
 			canvas2 = $("#myCanvas2")[0];
 			if (canvas2.getContext){
@@ -525,7 +534,7 @@ $(document).ready( function() {
     		if (hubType2.id !== "DERS"){
     			aCopyChainrings2 = aChainrings2.slice(0);
     			aCopySprockets2 = aSprockets2.slice(0);
-    			aChainrings2 = [hubType2.chainWheel];
+    			aChainrings2 = [hubType2.chainRing];
     			for (var i = 1; i < nMaxNumberChainrings; i++){
     				aChainrings2.push( "00" );
     			}
@@ -554,7 +563,7 @@ $(document).ready( function() {
     		if (hubType.id !== "DERS"){
     			aCopyChainrings = aChainrings.slice(0);
     			aCopySprockets = aSprockets.slice(0);
-    			aChainrings = [hubType.chainWheel];
+    			aChainrings = [hubType.chainRing];
     			for ( i = 1; i < nMaxNumberChainrings; i++){
     				aChainrings.push( "00" );
     			}
