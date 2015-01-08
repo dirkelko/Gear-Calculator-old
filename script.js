@@ -709,13 +709,14 @@ $(document).ready( function() {
     });
 
  	// create Slider for cadence selection
- 	$( "#cadenceSlider" ).slider({ min: 60 , max: 120, step: 1 });
+ 	$( "#cadenceSlider" ).slider({ min: 60 , max: 120, step: 1});
     $( "#cadenceSlider" ).slider( "value", 90);
 	$( "#cadenceValue" ).html( cadence );
     // event handler for cadence slider
 	$("#cadenceSlider").on( "slide", function( event, ui ) {
     	//console.log($("#slider").slider("value"));
-        cadence = $("#cadenceSlider").slider("value");
+    	cadence = ui.value;
+        //cadence = $("#cadenceSlider").slider("value");
         $("#cadenceValue").html( cadence );
 		gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
 		if(c2visible && canvas2.getContext){					
@@ -730,13 +731,14 @@ $(document).ready( function() {
     });
 	
 	//create slider for max allowed chain angle 
-    $( "#chainLineSlider" ).slider({ min: 1.5 , max: 3.5, step: 0.1 });
+    $( "#chainLineSlider" ).slider({ min: 1.50 , max: 3.50, step: 0.1 });
     $( "#chainLineSlider" ).slider( "value", dsplOps.maxChainAngle);
 	$( "#chainAngleValue" ).html( dsplOps.maxChainAngle.toPrecision(2) +'&deg;');
     // event handler for max allowe dchain angle
     $( "#chainLineSlider" ).on( "slide", function( event, ui ) {
     	//console.log($("#slider").slider("value"));
-    	dsplOps.maxChainAngle = $("#chainLineSlider").slider("value");
+    	//dsplOps.maxChainAngle = $("#chainLineSlider").slider("value");
+    	dsplOps.maxChainAngle = ui.value;
     	$( "#chainAngleValue" ).html( dsplOps.maxChainAngle.toPrecision(2) +'&deg;' );
     	gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType );
     	if(c2visible && canvas2.getContext){					

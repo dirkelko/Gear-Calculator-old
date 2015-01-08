@@ -254,6 +254,7 @@ label{
 #chainAngleValue{
     padding: 0 0 0 5px;
 }
+
 .ui-slider {
 	position: relative;
 	text-align: left;
@@ -341,14 +342,13 @@ button{
     padding: 0 10px 0 10px;
 }
 
-#copy {
-    float: left;
+.footer_text {
     font-weight: 100;
     font-size: small;
 }
-
-#mail {
+#copy{
+    float:left;
+}
+#mail{
     float: right;
-    font-weight: 100;
-    font-size: small;
 }
