@@ -131,7 +131,8 @@ function drawGraphics(canvas, gearSet, minRatio, maxRatio, cadence, dsplOps) {
 	// Draw red Chainring lines and circles with #teeth
 	for ( i = 0; i < gearSet.Chainrings.length; i++) {
 		var y = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 1)) + gY -10;
-		ctx.strokeStyle = "#DD0000";
+		ctx.strokeStyle = "#e34c26";
+		//ctx.strokeStyle = "#DD0000";
 		ctx.beginPath();
 		ctx.lineWidth = 1;
 		ctx.moveTo(gX, y);
@@ -140,7 +141,8 @@ function drawGraphics(canvas, gearSet, minRatio, maxRatio, cadence, dsplOps) {
 		ctx.closePath();
 		//draw a circle
 		ctx.beginPath();
-		ctx.fillStyle = "#DD0000";
+		ctx.fillStyle = "#e34c26";
+		//ctx.fillStyle = "#DD0000";
 		ctx.arc(gX + gWidth - 20 , y, 10, 0, Math.PI*2, true); 
 		ctx.closePath();
 		ctx.fill();

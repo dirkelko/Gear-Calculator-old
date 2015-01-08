@@ -97,7 +97,9 @@ var GearSet = function( aCWs, aSPs, circumference, hubType){
 
 
 function getURLParameter(name) {
-    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+    //first check if it is an old URL with "/#" instead of "/?"
+    var search = (location.href.indexOf("#"))? "?"+location.href.substring(location.href.indexOf("#")+1, location.href.length ) : location.search ;
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(search)||[,""])[1].replace(/\+/g, '%20'))||null;
 }
 
 function createURL(gearSet, gearSet2, cadence, dsplOps){
@@ -318,7 +320,7 @@ $(document).ready( function() {
 		// display canvas2 and scroll it down
 		$("#myCanvas2").show();
 		$("#myCanvas2").animate( {top: 0});
-		$("#myCanvas2").css('outline', '2px solid yellow');
+		$("#myCanvas2").css('outline', '2px solid #f06529');
 		$("#myCanvas").css('outline', 'none');
 		c2active = true;
 	    positionChainrings(aChainrings2, true);
@@ -454,7 +456,7 @@ $(document).ready( function() {
 		c2active = true;
 		positionChainrings(aChainrings2);
 		positionSprockets(aSprockets2);
-		$(this).css('outline', '2px solid yellow');		
+		$(this).css('outline', '2px solid #f06529');		
 		$("#myCanvas").css('outline', 'none');
  	    $('#selectBoxGearingType').val( hubType2.id );
  	    $('#selectWheelSize').val(gearSet2.circumference);
@@ -480,7 +482,7 @@ $(document).ready( function() {
 		$('#selectBoxChainrings').val((aChainrings.slice(0)).sort().toString());
 		$('#selectBoxSprockets').val((aSprockets.slice(0)).sort().toString());
 		if (c2visible){
-			$(this).css('outline', '2px solid yellow');		
+			$(this).css('outline', '2px solid #f06529');		
 		    $("#myCanvas2").css('outline', 'none');	
 		}
 		if (gearSet.isGearHub){
@@ -511,7 +513,7 @@ $(document).ready( function() {
 			// display canvas2 and scroll it down
 			$("#myCanvas2").show();
 			$("#myCanvas2").animate( {top: 0});
-			$("#myCanvas2").css('outline', '2px solid yellow');
+			$("#myCanvas2").css('outline', '2px solid #f06529');
 			$("#myCanvas").css('outline', 'none');
 			c2visible = true;
 			c2active = true;

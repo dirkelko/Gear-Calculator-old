@@ -338,17 +338,20 @@ button{
 }
 
 #footer{
-    height: 20px;
+    height: 36px;
     padding: 0 10px 0 10px;
 }
 
 .footer_text {
     font-weight: 100;
     font-size: small;
+    padding: 10px;
 }
 #copy{
     float:left;
 }
 #mail{
     float: right;
+}
+#html5_logo{float: right;
 }
