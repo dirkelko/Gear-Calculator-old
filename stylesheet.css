@@ -371,18 +371,23 @@ button:click {
    left: -120px;
    width: 400px;
    height: 50px;
-   line-height: 50px;
    text-align: center;
    opacity: 0.7;
    -webkit-transform: rotate(-45deg);
    -moz-transform:    rotate(-45deg);
    -ms-transform:     rotate(-45deg);
    transform:         rotate(-45deg);
-   font-size: 24px;
    font-weight: 700;
    color: white;
    background-color: red;
    border: 1px solid white;
    z-index: 500;
 }
-   
+#ribbon1{
+    line-height:30px;
+    font-size:18px;
+}
+#ribbon2{
+    line-height:20px;
+    font-size:12px;
+} 
