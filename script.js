@@ -105,7 +105,7 @@ function getURLParameter(name) {
 function createURL(gearSet, gearSet2, cadence, dsplOps){
     var url = location.origin + location.pathname + "?GR=" + gearSet.GearType + "&KB=" + gearSet.Chainrings +"&RZ=" + gearSet.Cogs + "&UF=" + gearSet.circumference 
         + "&TF=" + cadence + "&SL=" + dsplOps.maxChainAngle + "&UN=" + ((dsplOps.siUnits)?"KMH":"MPH"); 
-    if ( c2active ) {
+    if ( c2visible ) {
         url = url + "&GR2=" + gearSet2.GearType + "&KB2=" + gearSet2.Chainrings + "&RZ2=" + gearSet2.Cogs + "&UF2=" + gearSet2.circumference;
     }
     return url;
@@ -227,7 +227,20 @@ $(document).ready( function() {
 	var paramRZ2 = getURLParameter("RZ2");
 	var paramUF2 = getURLParameter("UF2");
 	var paramGR2 = getURLParameter("GR2");
+	var paramGT2 = getURLParameter("GT2");
 	
+	if ( paramKB !== null && paramRZ !== null ){
+	    aChainrings = paramKB.split(',');
+	    aChainrings.sort();
+	    for ( i = aChainrings.length; i < nMaxNumberChainrings; i++){
+		    aChainrings.unshift("00");
+	    }
+	    aSprockets   = paramRZ.split(',');
+	    aSprockets.sort();
+	    for ( i = aSprockets.length; i < nMaxNumberSprockets; i++){
+		    aSprockets.unshift("00");
+	    }
+	}
 	if ( paramKB2 !== null && paramRZ2 !== null ){
 	    c2visible = true;
 	    c2active = true;
@@ -249,6 +262,7 @@ $(document).ready( function() {
 	dsplOps.maxChainAngle = Number(( paramSL !== null )? paramSL : dsplOps.maxChainAngle);
 	hubType = ( paramGR !== null )? hubTypes.getById(paramGR) : hubTypes[0];
 	hubType2 = ( paramGR2 !== null )? hubTypes.getById(paramGR2) : hubTypes[0];
+	hubType2 = ( paramGT2 !== null )? hubTypes.getById(paramGT2) : hubTypes[0];
 	//hubType = hubTypes[0];
 	
     $('#selectWheelSize').val( (c2active)?circumference2:circumference );
