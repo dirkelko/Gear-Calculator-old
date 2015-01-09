@@ -1,6 +1,6 @@
 String.toLocaleString({
 	"en": {
-	    "title":"www.gear-calculator.com",
+	    "title":"Bicycle Gear Calculator",
 		"%gearing": "Gearing",
 		"%chainrings": "Chainrings",
 		"%sprockets": "Sprockets", 
@@ -29,7 +29,7 @@ String.toLocaleString({
 		"%tt_chain_angle": "sets the maximum allowed chain angle (approx. in degrees). Combinations where the chain runs too diagonal and should not be used are greyed out in the graphics."
 	},
 	"fr": {
-	    "%title":"www.gear-calculator.com",
+	    "%title":"Calculateur de Derailleurs",
 		"%gearing": "Moyeu",
 		"%chainrings": "Plateaux",
 		"%sprockets": "Pignons",
@@ -58,7 +58,7 @@ String.toLocaleString({
 		"%tt_chain_angle": "sets the maximum allowed chain angle (approx. in degrees). Combinations where the chain runs too diagonal and should not be used are greyed out in the graphics."
 	}, 
 	"de": {
-	    "%title":"www.ritzelrechner.de",
+	    "%title":"Der Ritzelrechner",
 		"%gearing": "Schaltung",
 		"%chainrings": "Kettenblätter",
 		"%sprockets": "Ritzel",
@@ -87,7 +87,7 @@ String.toLocaleString({
 		"%tt_chain_angle": "Setzt den maximal erlaubten Kettenschräglauf (näherungsweise in Grad). Kombinationen, bei denen die Kette schräger läuft als dieser Wert, werden in der Grafik ausgegraut."
 	},
 	"hu": {
-	    "%title":"www.gear.calculator.com",
+	    "%title":"Bicycle Gear Calculator",
 		"%gearing": "Áttételek",
 		"%chainrings": "Első lánck.",
 		"%sprockets": "Hátsó lánck.",

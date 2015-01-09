@@ -1,10 +1,10 @@
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     outline: none;
 }
-
 body{
     background-color: #ddd;
     /*width: 1024px;*/
@@ -12,6 +12,7 @@ body{
     padding: 0px;
     margin: 0;
 }
+
 div {
 	color: #FFFFFF;
 	/*font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;*/
@@ -321,6 +322,14 @@ button{
 	height: 22px;
 }
 
+button:hover {
+    background-color:#CCCCCC;
+}
+
+button:click {
+    background-color:#e00;
+}
+
 #buttonCompare{
     width: 100%;
 }
@@ -355,3 +364,25 @@ button{
 }
 #html5_logo{float: right;
 }
+.ribbon-banner {
+   display: block;
+   position: absolute;
+   top: 50px;
+   left: -120px;
+   width: 400px;
+   height: 50px;
+   line-height: 50px;
+   text-align: center;
+   opacity: 0.7;
+   -webkit-transform: rotate(-45deg);
+   -moz-transform:    rotate(-45deg);
+   -ms-transform:     rotate(-45deg);
+   transform:         rotate(-45deg);
+   font-size: 24px;
+   font-weight: 700;
+   color: white;
+   background-color: red;
+   border: 1px solid white;
+   z-index: 500;
+}
+   
