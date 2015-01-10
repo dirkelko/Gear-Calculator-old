@@ -746,6 +746,10 @@ $(document).ready( function() {
 		}			 
 		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
     });
+
+	$("#close_ribbon").click( function(){
+        $("#ribbon-banner").hide();
+	});
 	
 	//create slider for max allowed chain angle 
     $( "#chainLineSlider" ).slider({ min: 1.50 , max: 3.50, step: 0.1 });
