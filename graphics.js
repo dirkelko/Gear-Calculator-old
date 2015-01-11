@@ -176,18 +176,20 @@ function drawGraphics(canvas, gearSet, minRatio, maxRatio, cadence, dsplOps) {
 					ctx.fillStyle = "rgb(200,200,200)";
 					ctx.fillText(gearSet.Cogs[j], x, y - 1);
 					ctx.fillStyle = "rgb(00,00,00)";
-                    switch(dsplOps.values) {
-                        case "ratio":
-					        ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]).toPrecision(3), x, y - 16);
-                            break;
-                        case "development":
-					        ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000).toPrecision(3), x, y - 16);
-                            break;
-                        case "speed":
-					        ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* cadence * unitFactor).toPrecision(3), x, y - 16);
-                            break;
-                        default:
-                    }
+					if (!gearSet.isGearHub){
+                        switch(dsplOps.values) {
+                            case "ratio":
+    					        ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]).toPrecision(3), x, y - 16);
+                                break;
+                            case "development":
+    					        ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000).toPrecision(3), x, y - 16);
+                                break;
+                            case "speed":
+    					        ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* cadence * unitFactor).toPrecision(3), x, y - 16);
+                                break;
+                            default:
+                        }
+					}
 
 					// draw additional triangles for gear hubs
 					if (gearSet.isGearHub) {

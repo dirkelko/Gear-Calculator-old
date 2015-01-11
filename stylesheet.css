@@ -384,7 +384,7 @@ button:click {
    transform:         rotate(-45deg);
 }
 #ribbon1{
-    line-height:30px;
+    line-height:28px;
     font-size:18px;
 }
 #ribbon2{
@@ -403,5 +403,3 @@ button:click {
 	border-radius: 100%;
 	/*bottom: 10px;*/
 }
-
-
