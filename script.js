@@ -33,6 +33,16 @@ var hubTypes = [];
             }
         };
 
+var tireType;
+var tireTypes =[];
+    tireTypes.getNameByCircumference = function(id) {
+            for ( var it = 0; it < this.length; it++){
+                if ( id === this[it].id){
+                    return this[it].name;
+                }
+            }
+            return id +"mm";
+    };
 
 var circumference = "2125";
 var circumference2 = "2125";
@@ -172,9 +182,6 @@ $(document).ready( function() {
 	        'id':'test',
 	        'style':'left:' + Math.round(it*scaleWidth/nSelectableSprockets -2) + 'px',
 	    }).appendTo('#spScale');
-		//xTick = it*scaleWidth/nSelectableSprockets - 2;
-		//$("#spScale").append('<div class="scaleTick" style="left:' + xTick + 'px"></div>');
-		//$("#spScale div:nth-child(" + it + ")").css( "left", xTick );
 	}
 
 	// get Chainring/Sprocket sets, Tire dimensions and hub data from Jason file data.json
@@ -196,6 +203,8 @@ $(document).ready( function() {
 			} else if (key === 'TireSizes') {
 				for ( i = 0; i < val.length; i++) {
 					$('#selectWheelSize').append('<option value="' + val[i].size + '">' + val[i].name + '</option>');
+					var tire = { id:val[i].size, name:val[i].name };
+					tireTypes[i] = tire;
 				}
 			} else if (key === 'HubData') {
 				for ( i = 0; i < val.length; i++) {

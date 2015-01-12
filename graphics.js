@@ -47,7 +47,6 @@ function drawGraphics(canvas, gearSet, minRatio, maxRatio, cadence, dsplOps) {
 		var iMinDev = Math.floor(minDev * 10);
 		var iMaxDev = Math.floor(maxDev * 10 + 1);
 		ctx.textAlign = "left";
-		//ctx.fillText("Entfaltung/m", 10, 21);
 		ctx.fillText("%development".toLocaleString()+"/m", 10, 21);
 		ctx.textAlign = "center";
 		for (var i = iMinDev; i <= iMaxDev; i++) {
@@ -193,6 +192,12 @@ function drawGraphics(canvas, gearSet, minRatio, maxRatio, cadence, dsplOps) {
 
 					// draw additional triangles for gear hubs
 					if (gearSet.isGearHub) {
+					    if ( gearSet.Chainrings[i]/gearSet.Cogs[j] < gearSet.hubType.minRatio ){
+					        ctx.textAlign = "left";
+                            ctx.fillStyle = "#e34c26";
+					        ctx.fillText("%torque_warning".toLocaleString(), 10, 80);
+					        ctx.textAlign = "center";
+					    }
 						for ( var k = 0; k < gearSet.HubGears.length; k++) {
 							var xgh = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i] / gearSet.Cogs[j] 
 							    * gearSet.HubGears[k]*gearSet.circumference / 1000));
@@ -245,7 +250,7 @@ function drawGraphics(canvas, gearSet, minRatio, maxRatio, cadence, dsplOps) {
 	if (gearSet.hubType.id !== "DERS"){
 	    ctx.fillText( gearSet.hubType.name, 10, 181)
 	}
-	ctx.fillText( "%circumference".toLocaleString() + " " + gearSet.circumference + "mm", 10, 161);
+	ctx.fillText( "%wheel_size".toLocaleString() + " " + tireTypes.getNameByCircumference(gearSet.circumference), 10, 161);
 	ctx.fillRect(gX, gHeight -50, gWidth, 16);
 	ctx.fillStyle = "#FFFFFF";
 	ctx.strokeStyle = "#FFFFFF";
