@@ -15,7 +15,7 @@ function xLog(vMin, vMax, xSize, v) {
 
 // drawGraphics draws the actual graphics for the given gearSet
 //
-function drawGraphics(canvas, gearSet, minRatio, maxRatio, cadence, dsplOps) {
+function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 	//var nChainrings = 2;
 	var gWidth = canvas.width -1 ;
 	var gHeight = canvas.height - 1;
@@ -24,8 +24,8 @@ function drawGraphics(canvas, gearSet, minRatio, maxRatio, cadence, dsplOps) {
 	var ctx = canvas.getContext('2d');
 
 	// calculate the min and max values of the development scale ( 80%-115% of actual values);
-	var maxDev = maxRatio * gearSet.circumference / 1000 * 1.15;
-	var minDev = minRatio * gearSet.circumference / 1000 * 0.80;
+	var maxDev = maxDev * 1.15;
+	var minDev = minDev * 0.80;
 	
 	// Draw Rectangle
 	ctx.fillStyle = "#FFFFFF";
