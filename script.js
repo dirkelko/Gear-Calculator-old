@@ -102,6 +102,9 @@ var GearSet = function( aCWs, aSPs, circumference, hubType){
 			this.ChainAngle[ic][jc] = ( Math.asin( dist / 430) / Math.PI * 180  );
 		}
 	}
+	this.minDev = this.Ratios[0][this.Cogs.length - 1] * this.circumference / 1000 * this.HubGears[0];
+	this.maxDev = this.Ratios[this.Chainrings.length - 1][0] * this.circumference / 1000 * this.HubGears[this.HubGears.length - 1];
+
 	return this;
 };
 
@@ -124,15 +127,27 @@ function createURL(gearSet, gearSet2, cadence, dsplOps){
 
 function drawBothGraphics(canvas, canvas2, gearSet, gearSet2, cadence, dsplOps) {
 
-	var minRatio = Math.min(gearSet.Ratios[0][gearSet.Cogs.length - 1] * gearSet.HubGears[0], 
-		                    gearSet2.Ratios[0][gearSet2.Cogs.length - 1] * gearSet2.HubGears[0]);
-	var maxRatio = Math.max(gearSet.Ratios[gearSet.Chainrings.length - 1][0] * gearSet.HubGears[gearSet.HubGears.length - 1],
-		                    gearSet2.Ratios[gearSet2.Chainrings.length - 1][0] * gearSet2.HubGears[gearSet2.HubGears.length - 1]);
+	var minDev = Math.min(gearSet.minDev, gearSet2.minDev);
+	var maxDev = Math.max(gearSet.maxDev, gearSet2.maxDev);
 	
-	drawGraphics(canvas, gearSet, minRatio, maxRatio, cadence, dsplOps);			 
-	drawGraphics(canvas2, gearSet2, minRatio, maxRatio, cadence, dsplOps);
+	drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps);			 
+	drawGraphics(canvas2, gearSet2, minDev, maxDev, cadence, dsplOps);
 }
 
+function updateGraphics(canvas, canvas2, aChainrings, aSprockets, circumference, circumference2, hubType, hubType2){
+	if (canvas.getContext){
+		gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
+		if(c2visible && canvas2.getContext){					
+			gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
+			var minDev = Math.min(gearSet.minDev, gearSet2.minDev);
+        	var maxDev = Math.max(gearSet.maxDev, gearSet2.maxDev);
+        	drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps);			 
+        	drawGraphics(canvas2, gearSet2, minDev, maxDev, cadence, dsplOps);
+		} else {
+            drawGraphics(canvas, gearSet, gearSet.minDev, gearSet.maxDev, cadence, dsplOps);			 
+		}			 
+	}
+}
 
 
 // Document ready for initializing the screen and defining the event handlers using jQuery 
@@ -325,8 +340,7 @@ $(document).ready( function() {
 		canvas.width = parseInt($("#myCanvas").css("width"),10);	 
 		canvas.height = parseInt($("#myCanvas").css("height"),10);	 
 		gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
-		drawGraphics(canvas, gearSet, gearSet.Ratios[0][gearSet.Cogs.length-1]*gearSet.HubGears[0], 
-	        gearSet.Ratios[gearSet.Chainrings.length-1][0]*gearSet.HubGears[gearSet.HubGears.length-1], cadence, dsplOps);			 
+		drawGraphics(canvas, gearSet, gearSet.minDev, gearSet.maxDev, cadence, dsplOps);			 
 	    // position first set of Chainrings and Sprockets
 	    positionChainrings(aChainrings, true);
 	    positionSprockets(aSprockets, true);
@@ -380,18 +394,8 @@ $(document).ready( function() {
 					aChainrings[iChainring] = 0;
 				}
 			}
-			if (canvas.getContext){
-				gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
-				if(c2visible && canvas2.getContext){					
-					gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-					drawBothGraphics(canvas, canvas2, gearSet, gearSet2,  cadence, dsplOps);
-				} else {
-					drawGraphics(canvas, gearSet, gearSet.Ratios[0][gearSet.Cogs.length-1]*gearSet.HubGears[0], 
-				         		gearSet.Ratios[gearSet.Chainrings.length-1][0]*gearSet.HubGears[gearSet.HubGears.length-1],  
-				         		cadence, dsplOps);			 
-				}			 
-			}
-			// set Select Box according to current Chainrings			
+            updateGraphics(canvas, canvas2, aChainrings, aSprockets, circumference, circumference2, hubType, hubType2);			
+            // set Select Box according to current Chainrings			
 			$('#selectBoxChainrings').val(((!c2active)? aChainrings.slice(0) : aChainrings2.slice(0)).sort().toString());
 		    $("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
 		}
@@ -441,17 +445,7 @@ $(document).ready( function() {
 					aSprockets[iSprocket] = 0;
 				}
 			}
-			if (canvas.getContext){
-				gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
-				if(c2visible && canvas2.getContext){					
-					gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-					drawBothGraphics(canvas, canvas2, gearSet, gearSet2, cadence, dsplOps);
-				} else {
-					drawGraphics(canvas, gearSet, gearSet.Ratios[0][gearSet.Cogs.length-1]*gearSet.HubGears[0], 
-				         		gearSet.Ratios[gearSet.Chainrings.length-1][0]*gearSet.HubGears[gearSet.HubGears.length-1],  
-				         		cadence, dsplOps);			 
-				}			 
-			}
+            updateGraphics(canvas, canvas2, aChainrings, aSprockets, circumference, circumference2, hubType, hubType2);			
 			// set Select Box according to current Sprockets			
 			$('#selectBoxSprockets').val(((!c2active)? aSprockets.slice(0) : aSprockets2.slice(0)).sort().toString());
 		    $("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
@@ -616,15 +610,7 @@ $(document).ready( function() {
    			} 		
       	}
       	
-		gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
-		if(c2visible && canvas2.getContext){					
-			gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-			drawBothGraphics(canvas, canvas2, gearSet, gearSet2, cadence, dsplOps);
-		} else {
-			drawGraphics(canvas, gearSet, gearSet.Ratios[0][gearSet.Cogs.length-1]*gearSet.HubGears[0], 
-				         gearSet.Ratios[gearSet.Chainrings.length-1][0]*gearSet.HubGears[gearSet.HubGears.length-1],  
-				         cadence, dsplOps);			 
-		}			 
+        updateGraphics(canvas, canvas2, aChainrings, aSprockets, circumference, circumference2, hubType, hubType2);			
 		//positionSprockets(aSprockets);
 		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
     });
@@ -636,15 +622,7 @@ $(document).ready( function() {
 		} else {
     		aSprockets   = $('#selectBoxSprockets option:selected').val().split(',') ;
     	}
-				gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
-				if(c2visible && canvas2.getContext){					
-					gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-					drawBothGraphics(canvas, canvas2, gearSet, gearSet2, cadence, dsplOps);
-				} else {
-					drawGraphics(canvas, gearSet, gearSet.Ratios[0][gearSet.Cogs.length-1]*gearSet.HubGears[0], 
-				         	gearSet.Ratios[gearSet.Chainrings.length-1][0]*gearSet.HubGears[gearSet.HubGears.length-1],  
-				         	cadence, dsplOps);			 
-				}			 
+        updateGraphics(canvas, canvas2, aChainrings, aSprockets, circumference, circumference2, hubType, hubType2);			
 		positionSprockets((c2active)?aSprockets2:aSprockets, true);
  		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
    });
@@ -655,15 +633,7 @@ $(document).ready( function() {
 	    } else {
 	    	aChainrings   = $('#selectBoxChainrings option:selected').val().split(',') ;
 	    }
-				gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
-				if(c2visible && canvas2.getContext){					
-					gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-					drawBothGraphics(canvas, canvas2, gearSet, gearSet2, cadence, dsplOps);
-				} else {
-					drawGraphics(canvas, gearSet, gearSet.Ratios[0][gearSet.Cogs.length-1]*gearSet.HubGears[0], 
-				         		gearSet.Ratios[gearSet.Chainrings.length-1][0]*gearSet.HubGears[gearSet.HubGears.length-1],  
-				         		cadence, dsplOps );			 
-				}			 
+        updateGraphics(canvas, canvas2, aChainrings, aSprockets, circumference, circumference2, hubType, hubType2);			
 		positionChainrings((c2active)?aChainrings2:aChainrings, true);
 		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
     });
@@ -675,15 +645,7 @@ $(document).ready( function() {
  		    circumference   = $('#selectWheelSize option:selected').val();
  		}
     	$('#inputCircumference').val(circumference);
-		gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType );
-		if(c2visible && canvas2.getContext){					
-			gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-			drawBothGraphics(canvas, canvas2, gearSet, gearSet2, cadence, dsplOps);
-		} else {
-			drawGraphics(canvas, gearSet, gearSet.Ratios[0][gearSet.Cogs.length-1]*gearSet.HubGears[0], 
-		         		gearSet.Ratios[gearSet.Chainrings.length-1][0]*gearSet.HubGears[gearSet.HubGears.length-1],  
-		         		cadence, dsplOps);			 
-		}			 
+        updateGraphics(canvas, canvas2, aChainrings, aSprockets, circumference, circumference2, hubType, hubType2);			
 		//positionChainrings(aChainrings);
  		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
    });
@@ -696,41 +658,18 @@ $(document).ready( function() {
  		    circumference   = $('#inputCircumference').val();
     	    $('#selectWheelSize').val(circumference);
  		}
-		gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType );
-		if(c2visible && canvas2.getContext){					
-			gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-			drawBothGraphics(canvas, canvas2, gearSet, gearSet2, cadence, dsplOps);
-		} else {
-			drawGraphics(canvas, gearSet, gearSet.Ratios[0][gearSet.Cogs.length-1]*gearSet.HubGears[0], 
-		         		gearSet.Ratios[gearSet.Chainrings.length-1][0]*gearSet.HubGears[gearSet.HubGears.length-1],  
-		         		cadence, dsplOps);			 
-		}			 
+        updateGraphics(canvas, canvas2, aChainrings, aSprockets, circumference, circumference2, hubType, hubType2);			
     });
 
 
  	$('#selectDisplay').change(function(){
     	dsplOps.values = $('#displaySelect option:selected').val();
-				gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType );
-				if(c2visible && canvas2.getContext){					
-					gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-					drawBothGraphics(canvas, canvas2, gearSet, gearSet2, cadence, dsplOps);
-				} else {
-					drawGraphics(canvas, gearSet, gearSet.Ratios[0][gearSet.Cogs.length-1]*gearSet.HubGears[0], 
-				         		gearSet.Ratios[gearSet.Chainrings.length-1][0]*gearSet.HubGears[gearSet.HubGears.length-1],  
-				         	    cadence, dsplOps);			 
-				}			 
+        updateGraphics(canvas, canvas2, aChainrings, aSprockets, circumference, circumference2, hubType, hubType2);			
     });
        
     $( "input[name=units]:radio" ).change(function(){
         dsplOps.siUnits = ($("input[name=units]:checked").val() === 'kmh');
-		if(c2visible && canvas2.getContext){					
-			gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-			drawBothGraphics(canvas, canvas2, gearSet, gearSet2, cadence, dsplOps);
-		} else {
-			drawGraphics(canvas, gearSet, gearSet.Ratios[0][gearSet.Cogs.length-1]*gearSet.HubGears[0], 
-				         gearSet.Ratios[gearSet.Chainrings.length-1][0]*gearSet.HubGears[gearSet.HubGears.length-1],  
-				         cadence, dsplOps);			 
-		}
+        updateGraphics(canvas, canvas2, aChainrings, aSprockets, circumference, circumference2, hubType, hubType2);			
 		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
     });
 
@@ -744,15 +683,7 @@ $(document).ready( function() {
     	cadence = ui.value;
         //cadence = $("#cadenceSlider").slider("value");
         $("#cadenceValue").html( cadence );
-		gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
-		if(c2visible && canvas2.getContext){					
-			gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-			drawBothGraphics(canvas, canvas2, gearSet, gearSet2, cadence, dsplOps);
-		} else {
-			drawGraphics(canvas, gearSet, gearSet.Ratios[0][gearSet.Cogs.length-1]*gearSet.HubGears[0], 
-				         gearSet.Ratios[gearSet.Chainrings.length-1][0]*gearSet.HubGears[gearSet.HubGears.length-1],  
-				         cadence, dsplOps);			 
-		}			 
+        updateGraphics(canvas, canvas2, aChainrings, aSprockets, circumference, circumference2, hubType, hubType2);			
 		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
     });
 
@@ -770,15 +701,7 @@ $(document).ready( function() {
     	//dsplOps.maxChainAngle = $("#chainLineSlider").slider("value");
     	dsplOps.maxChainAngle = ui.value;
     	$( "#chainAngleValue" ).html( dsplOps.maxChainAngle.toPrecision(2) +'&deg;' );
-    	gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType );
-    	if(c2visible && canvas2.getContext){					
-    		gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-    		drawBothGraphics(canvas, canvas2, gearSet, gearSet2, cadence, dsplOps);
-    	} else {
-			drawGraphics(canvas, gearSet, gearSet.Ratios[0][gearSet.Cogs.length-1]*gearSet.HubGears[0], 
-				         gearSet.Ratios[gearSet.Chainrings.length-1][0]*gearSet.HubGears[gearSet.HubGears.length-1],  
-				         cadence, dsplOps);			 
-    	}			 
+        updateGraphics(canvas, canvas2, aChainrings, aSprockets, circumference, circumference2, hubType, hubType2);			
 		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
     });
 
