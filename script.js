@@ -286,7 +286,7 @@ $(document).ready( function() {
 	dsplOps.maxChainAngle = Number(( paramSL !== null )? paramSL : dsplOps.maxChainAngle);
 	hubType = ( paramGR !== null )? hubTypes.getById(paramGR) : hubTypes[0];
 	hubType2 = ( paramGR2 !== null )? hubTypes.getById(paramGR2) : hubTypes[0];
-	hubType2 = ( paramGT2 !== null )? hubTypes.getById(paramGT2) : hubTypes[0];
+	hubType2 = ( paramGT2 !== null )? hubTypes.getById(paramGT2) : hubType2;
 	//hubType = hubTypes[0];
 	
     $('#selectWheelSize').val( (c2active)?circumference2:circumference );
