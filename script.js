@@ -35,11 +35,15 @@ var tireTypes =[];
             return id +"mm";
     };
 
+// initial values
 var circumference = "2125";
 var circumference2 = "2125";
 var cadence = 90;
-var distSprockets = [5.5, 5.5, 5.5, 5.5, 5.3, 5.0, 5.0, 4.8, 4.34, 3.95, 3.9]; //distance/mm between sprockets 
+
+//distance/mm between sprockets 
+var distSprockets = [5.5, 5.5, 5.5, 5.5, 5.3, 5.0, 5.0, 4.8, 4.34, 3.95, 3.9]; 
 var distChainrings = 5.0;
+
 // object for storing display options:
 var dsplOps = { siUnits:true, values:"teeth", maxChainAngle:2.5};
 
@@ -93,6 +97,7 @@ var GearSet = function( aCWs, aSPs, circumference, hubType){
 			this.ChainAngle[ic][jc] = ( Math.asin( dist / 430) / Math.PI * 180  );
 		}
 	}
+	// calculate minimum Development and maximum Development for this gearSet (this.HubGears = [1.0] for derailleurs)
 	this.minDev = this.Ratios[0][this.Cogs.length - 1] * this.circumference / 1000 * this.HubGears[0];
 	this.maxDev = this.Ratios[this.Chainrings.length - 1][0] * this.circumference / 1000 * this.HubGears[this.HubGears.length - 1];
 
@@ -241,7 +246,6 @@ $(document).ready( function() {
 
 	}); 
 
-
 	// get Chainrings and Sprockets from URL
 	// example: http://www.gear-calculator.com?KB=39,53&RZ=12,13,14,15,16,17,18,19,21,23&GR=DERS&TF=85&UF=2099&SL=2
 	var paramKB = getURLParameter("KB");
@@ -291,8 +295,8 @@ $(document).ready( function() {
 	hubType = ( paramGR !== null )? hubTypes.getById(paramGR) : hubTypes[0];
 	hubType2 = ( paramGR2 !== null )? hubTypes.getById(paramGR2) : hubTypes[0];
 	hubType2 = ( paramGT2 !== null )? hubTypes.getById(paramGT2) : hubType2;
-	//hubType = hubTypes[0];
-	
+
+    // set controls with initial values or from URL parameters
     $('#selectWheelSize').val( (c2active)?circumference2:circumference );
     $('#inputCircumference').val((c2active)?circumference2:circumference);
  	$('#selectBoxChainrings').val(aChainrings.toString());
@@ -332,7 +336,6 @@ $(document).ready( function() {
 			$(".sprocket:nth-child(" + i + ")").children("div").html( (sprockets[i-1]>0)? sprockets[i-1] : null );
 		}
 	}
-
 
 	// make the Chainrings movable
 	$(".Chainring").draggable({ axis: "x", containment: "parent" });
@@ -410,8 +413,6 @@ $(document).ready( function() {
 		// calculate nearest tick on scale
 		var nPosition = ui.position.left - scaleLeft + scaleWidth/nSelectableChainrings;
 		var nTick = Math.round( nPosition/scaleWidth*nSelectableChainrings );
-		// get which Chainrings is moved (from id "cwX")
-		//var iChainring = $(this).attr("id").substring(2,3) - 1 ;
 		//move ring to the nearest tick or place on left side
 		if ( nTick >= 0){
 			$(this).css("left", Math.round(nTick*scaleWidth/nSelectableChainrings + scaleLeft -25));
@@ -461,8 +462,6 @@ $(document).ready( function() {
 		// calculate nearest tick on scale
 		var nPosition = ui.position.left - scaleLeft + scaleWidth/nSelectableSprockets;
 		var nTick = Math.round( nPosition/scaleWidth*nSelectableSprockets );
-		// get which Sprocket is moved (from id "spXX")
-		//var iSprocket = $(this).attr("id").substring(2,4) - 1 ;
 		//move ring to the nearest tick or place on left side
 		if ( nTick >= 0){
 			$(this).css("left", Math.round(nTick*scaleWidth/nSelectableSprockets + scaleLeft -25) );
@@ -529,6 +528,7 @@ $(document).ready( function() {
 			// take width and height for canvas area from CSS for #myCanvas 
 				canvas2.width = parseInt($("#myCanvas").css("width"), 10);	 
 				canvas2.height = parseInt($("#myCanvas").css("height"),10);
+				gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType );	 
 				gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);	 
 				drawBothGraphics(canvas, canvas2, gearSet, gearSet2, cadence, dsplOps);
 			}
@@ -540,6 +540,15 @@ $(document).ready( function() {
 			c2visible = true;
 			c2active = true;
 		} else {
+		    if (c2active){
+		        aChainrings = aChainrings2.slice(0);
+		        aSprockets = aSprockets2.slice();
+		        circumference = circumference2;
+		        hubType = hubType2;
+                updateGraphics(canvas, canvas2, aChainrings, aSprockets, aChainrings2, aSprockets2, circumference, circumference2, hubType, hubType2);			
+		    }else{
+		        
+		    }
 			// scroll up Canvas2 and hide it
 			$("#myCanvas2").animate( {top: -240}, function(){$("#myCanvas2").hide();});
 			c2visible = false;
