@@ -216,11 +216,11 @@ $(document).ready( function() {
 		$.each(data, function(key, val) {
 			if (key === "SprocketSets") {
 				for (var i = 0; i < val.length; i++) {
-					$('#selectBoxSprockets').append('<option value="' + val[i].set + '">' + val[i].name + '</option>');
+					$('#selectBoxSprockets').append('<option value="' + val[i].set + '">' + ((i===0)?"%custom".toLocaleString():val[i].name) + '</option>');
 				}
 			} else if (key === 'ChainringSets') {
 				for ( i = 0; i < val.length; i++) {
-					$('#selectBoxChainrings').append('<option value="' + val[i].set + '">' + val[i].name + '</option>');
+					$('#selectBoxChainrings').append('<option value="' + val[i].set + '">' + ((i===0)?"%custom".toLocaleString():val[i].name) + '</option>');
 				}
 			} else if (key === 'TireSizes') {
 				for ( i = 0; i < val.length; i++) {
