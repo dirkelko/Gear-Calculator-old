@@ -359,6 +359,9 @@ button:click {
 #copy{
     float:left;
 }
+#f_link{
+    left:900px;
+}
 #mail{
     float: right;
 }
