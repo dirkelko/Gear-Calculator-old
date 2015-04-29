@@ -45,7 +45,7 @@ var distSprockets = [5.5, 5.5, 5.5, 5.5, 5.3, 5.0, 5.0, 4.8, 4.34, 3.95, 3.9];
 var distChainrings = 5.0;
 
 // object for storing display options:
-var dsplOps = { siUnits:true, values:"teeth", maxChainAngle:2.5};
+var dsplOps = { siUnits:true, values:"teeth", maxChainAngle:2.6};
 
 var canvas2;
 var c2visible = false;
