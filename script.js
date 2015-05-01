@@ -4,7 +4,7 @@ var nMinChainringTeeth = 20;
 var nSelectableChainrings = nMaxChainringTeeth - nMinChainringTeeth;
 var nMaxNumberChainrings = 3;
 	
-var nMaxSprocketTeeth = 44;
+var nMaxSprocketTeeth = 45;
 var nMinSprocketTeeth = 9;
 var nSelectableSprockets = nMaxSprocketTeeth - nMinSprocketTeeth;
 var nMaxNumberSprockets = 11;
