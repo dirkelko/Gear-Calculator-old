@@ -28,7 +28,10 @@ String.toLocaleString({
 		"%tt_display": "display the numerical values directly",
 		"%tt_units": "choose between SI (meter, km/h) and US customary (inch, mile) units",
 		"%tt_url": "use this URL to point to the currently selected gearing e.g. for referencing it in online discussions etc.",
-		"%tt_chain_angle": "sets the maximum allowed chain angle (approx. in degrees). Combinations where the chain runs too diagonal and should not be used are greyed out in the graphics."
+		"%tt_chain_angle": "sets the maximum allowed chain angle (approx. in degrees). Combinations where the chain runs too diagonal and should not be used are greyed out in the graphics.",
+		"%ribbontext_top": "Please Support",
+		"%ribbontext_sub": "Baltimore Bicycle Experience",
+		"%ribbon_link": "http://baltimorebikeexperience.com/Donate"
 	},
 	"es": {
 		"%title":"Calculador de desarrollos de bicicleta",
@@ -59,7 +62,10 @@ String.toLocaleString({
 		"%tt_display": "Mostrar directamente los valores numéricos",
 		"%tt_units": "Escoge las unidades entre S.I. (metros, km/h) o US/imperial (pulgadas, milla)",
 		"%tt_url": "Usa esta URL para apuntar a la configuración seleccionada en este momento (por ejemplo, para referirte a ella en foros online, etc)",
-		"%tt_chain_angle": "Configura el mayor ángulo de cadena permitido (aprox. en grados). Las combinaciones en las que la cadena se mueve demasiado en diagonal y no deben ser usadas aparecen en gris en los gráficos."
+		"%tt_chain_angle": "Configura el mayor ángulo de cadena permitido (aprox. en grados). Las combinaciones en las que la cadena se mueve demasiado en diagonal y no deben ser usadas aparecen en gris en los gráficos.",
+		"%ribbontext_top": "",
+		"%ribbontext_sub": "Ribbon Sub Text es",
+		"%ribbon_link": "http://www.sap.es"
 		},
 	"fr": {
 	    "%title":"Calculateur de Derailleurs",
@@ -90,7 +96,10 @@ String.toLocaleString({
 		"%tt_display": "display the numerical values directly",
 		"%tt_units": "choose between SI (meter, km/h) and US customary (inch, mile) units",
 		"%tt_url": "use this URL to point to the currently selected gearing e.g. for referencing it in online discussions etc.",
-		"%tt_chain_angle": "sets the maximum allowed chain angle (approx. in degrees). Combinations where the chain runs too diagonal and should not be used are greyed out in the graphics."
+		"%tt_chain_angle": "sets the maximum allowed chain angle (approx. in degrees). Combinations where the chain runs too diagonal and should not be used are greyed out in the graphics.",
+		"%ribbontext_top": "",
+		"%ribbontext_sub": "Ribbon Sub Text fr",
+		"%ribbon_link": "http://www.sap.fr"
 	}, 
 	"de": {
 	    "%title":"Der Ritzelrechner",
@@ -121,7 +130,10 @@ String.toLocaleString({
 		"%tt_display": "Zeigt die ausgewählten Werte zusätzlich numerisch an",
 		"%tt_units": "Auswahl zwischen SI (meter, km/h) und US (inch, mile) Einheiten",
 		"%tt_url": "Diese URL zeigt direkt die gerade ausgewählte Schaltung an und kann z.B. als Referenz in Online Diskussionen verwendet werden",
-		"%tt_chain_angle": "Setzt den maximal erlaubten Kettenschräglauf (näherungsweise in Grad). Kombinationen, bei denen die Kette schräger läuft als dieser Wert, werden in der Grafik ausgegraut."
+		"%tt_chain_angle": "Setzt den maximal erlaubten Kettenschräglauf (näherungsweise in Grad). Kombinationen, bei denen die Kette schräger läuft als dieser Wert, werden in der Grafik ausgegraut.",
+		"%ribbontext_top": "",
+		"%ribbontext_sub": "Hamburger Augen auf!",
+		"%ribbon_link": "http://www.blitzrad.de/diebstahl/"
 	},
 	"hu": {
 	    "%title":"Mindentudó áttételkalkulátor",
@@ -152,7 +164,10 @@ String.toLocaleString({
 		"%tt_display": "Jelenítsd meg a diagramon a kiválasztott mennyiség számértékét is!",
 		"%tt_units": "Válassz az SI (méter, km/h) és az angolszász (inch, mile) egységek között!",
 		"%tt_url": "Ezen a webcímen találod azt az áttételezést, amely ebben a pillanatban látszik a képernyődön. Ha kimásolod, bármikor felidézheted magadnak, ha kell, ill. megoszthatod másokkal is.",
-		"%tt_chain_angle": "Itt állíthatod be (kb. fokban megadva), hogy maximum mekkora oldalirányú láncelhajlást tartasz elfogadhatónak. Azok a lánckerék-kombinációk, amelyeknél ennél nagyobb az elhajlás (túl ferdén fut a lánc) kihalványítva látszanak a diagramon."
+		"%tt_chain_angle": "Itt állíthatod be (kb. fokban megadva), hogy maximum mekkora oldalirányú láncelhajlást tartasz elfogadhatónak. Azok a lánckerék-kombinációk, amelyeknél ennél nagyobb az elhajlás (túl ferdén fut a lánc) kihalványítva látszanak a diagramon.",
+		"%ribbontext_top": "",
+		"%ribbontext_sub": "Ribbon Sub Text hu",
+		"%ribbon_link": "http://www.sap.hu"
 	}
 
 });

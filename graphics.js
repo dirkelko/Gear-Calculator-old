@@ -183,6 +183,9 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
                             case "development":
     					        ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000).toPrecision(3), x, y - 16);
                                 break;
+                            case "gear_inches":
+    					        ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/25.4/3.1415927).toPrecision(3), x, y - 16);
+                                break;
                             case "speed":
     					        ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* cadence * unitFactor).toPrecision(3), x, y - 16);
                                 break;
@@ -218,6 +221,9 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
                                 case "development":
 					                ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.HubGears[k]*gearSet.circumference/1000).toPrecision(3), xgh, y - 16);
                                     break;
+                            case "gear_inches":
+    					        ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.HubGears[k]*gearSet.circumference/25.4/3.1415927).toPrecision(3), xgh, y - 16);
+                                break;
                                 case "speed":
 					                ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.HubGears[k]*gearSet.circumference/1000* cadence * unitFactor).toPrecision(3), xgh, y - 16);
                                     break;

@@ -369,6 +369,7 @@ button:click {
 }
 #ribbon-banner {
    display: block;
+   /*display: none;*/
    position: absolute;
    top: 50px;
    left: -120px;
@@ -378,7 +379,7 @@ button:click {
    opacity: 0.7;
    font-weight: 500;
    color: white;
-   background-color: black;
+   background-color: red;
    border: 1px solid white;
    z-index: 5;
    -webkit-transform: rotate(-45deg);

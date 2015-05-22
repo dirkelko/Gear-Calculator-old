@@ -174,6 +174,10 @@ $(document).ready( function() {
     document.getElementById("o_development").firstChild.nodeValue = "%development".toLocaleString();
     document.getElementById("o_ratio").firstChild.nodeValue = "%ratio".toLocaleString();
     document.getElementById("o_speed").firstChild.nodeValue = "%speed".toLocaleString();
+    document.getElementById("ribbon-banner").style.visibility=(("%ribbontext_top".toLocaleString()=="")?"hidden":"visible");
+    document.getElementById("ribbon-link").firstChild.nodeValue = "%ribbontext_top".toLocaleString();
+    document.getElementById("ribbon-link").href = "%ribbon_link".toLocaleString();
+    document.getElementById("ribbon2").firstChild.nodeValue = "%ribbontext_sub".toLocaleString();
     $("#mail").html("%mail".toLocaleString());
 
     $("#buttonCompare").attr("title", "%tt_compare".toLocaleString());
