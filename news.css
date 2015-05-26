@@ -1,0 +1,21 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+}
+body{
+    background-color: #ddd;
+    /*width: 1024px;*/
+    height: 100%;
+    padding: 0px;
+    margin: 0;
+	font-family: Arial, sans-serif;
+}
+#news_text{
+    color: #000;
+    background-color:#fff;
+    width: 1024px;
+    margin: auto;
+    padding: 20px;
+}
