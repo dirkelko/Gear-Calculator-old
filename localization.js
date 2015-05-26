@@ -131,9 +131,9 @@ String.toLocaleString({
 		"%tt_units": "Auswahl zwischen SI (meter, km/h) und US (inch, mile) Einheiten",
 		"%tt_url": "Diese URL zeigt direkt die gerade ausgewählte Schaltung an und kann z.B. als Referenz in Online Diskussionen verwendet werden",
 		"%tt_chain_angle": "Setzt den maximal erlaubten Kettenschräglauf (näherungsweise in Grad). Kombinationen, bei denen die Kette schräger läuft als dieser Wert, werden in der Grafik ausgegraut.",
-		"%ribbontext_top": "",
+		"%ribbontext_top": "GESTOHLEN",
 		"%ribbontext_sub": "Hamburger Augen auf!",
-		"%ribbon_link": "http://www.blitzrad.de/diebstahl/"
+		"%ribbon_link": "news_de.html"
 	},
 	"hu": {
 	    "%title":"Mindentudó áttételkalkulátor",
