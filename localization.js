@@ -12,7 +12,7 @@ String.toLocaleString({
 		"%units": "Units",
 		"%compare": "Compare two Setups",
 		"%derailleurs": "Derailleurs",
-		"%custom": "Custom",
+		"%custom": "Custom", 
 		"%teeth": "Teeth",
 		"%development": "Development",
 		"%ratio": "Ratio",
