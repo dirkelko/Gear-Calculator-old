@@ -30,7 +30,7 @@ String.toLocaleString({
 		"%tt_url": "use this URL to point to the currently selected gearing e.g. for referencing it in online discussions etc.",
 		"%tt_chain_angle": "sets the maximum allowed chain angle (approx. in degrees). Combinations where the chain runs too diagonal and should not be used are greyed out in the graphics.",
 		"%ribbontext_top": "Please Support",
-		"%ribbontext_sub": "Baltimore Bicycle Experience",
+		"%ribbontext_sub": "Baltimore Bike Experience",
 		"%ribbon_link": "http://baltimorebikeexperience.com/Donate"
 	},
 	"es": {
