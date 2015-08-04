@@ -1,3 +1,6 @@
 {
-
+  "deploy": {
+    "destination": "MY_NSP_ABAP",
+    "name": "Z_GEAR_CALC"
+  }
 }
