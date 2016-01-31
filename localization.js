@@ -109,7 +109,7 @@ String.toLocaleString({
 		"%wheel_size": "Reifengröße",
 		"%circumference": "Radumfang",
 		"%display": "Anzeige", 
-		"%cadence": "Trittfreq.",
+		"%cadence": "Trittfrequenz",
 		"%chain_angle": "Kettenwinkel <",
 		"%units": "Einheit",
 		"%compare": "Vergleich",
