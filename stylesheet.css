@@ -381,7 +381,7 @@ button:click {
    opacity: 0.7;
    font-weight: 500;
    color: white;
-   background-color: red;
+   background-color: black;
    border: 1px solid white;
    z-index: 5;
    -webkit-transform: rotate(-45deg);

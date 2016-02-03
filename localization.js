@@ -29,8 +29,8 @@ String.toLocaleString({
 		"%tt_units": "choose between SI (meter, km/h) and US customary (inch, mile) units",
 		"%tt_url": "use this URL to point to the currently selected gearing e.g. for referencing it in online discussions etc.",
 		"%tt_chain_angle": "sets the maximum allowed chain angle (approx. in degrees). Combinations where the chain runs too diagonal and should not be used are greyed out in the graphics.",
-		"%ribbontext_top": "",
-		"%ribbontext_sub": "Baltimore Bike Experience",
+		"%ribbontext_top": "Sheldon Brown",
+		"%ribbontext_sub": "1944-2008",
 		"%ribbon_link": "http://baltimorebikeexperience.com/Donate"
 	},
 	"es": {
@@ -131,9 +131,9 @@ String.toLocaleString({
 		"%tt_units": "Auswahl zwischen SI (meter, km/h) und US (inch, mile) Einheiten",
 		"%tt_url": "Diese URL zeigt direkt die gerade ausgewählte Schaltung an und kann z.B. als Referenz in Online Diskussionen verwendet werden",
 		"%tt_chain_angle": "Setzt den maximal erlaubten Kettenschräglauf (näherungsweise in Grad). Kombinationen, bei denen die Kette schräger läuft als dieser Wert, werden in der Grafik ausgegraut.",
-		"%ribbontext_top": "",
-		"%ribbontext_sub": "Hamburger Augen auf!",
-		"%ribbon_link": "news_de.html"
+		"%ribbontext_top": "Sheldon Brown",
+		"%ribbontext_sub": "14.7.1944 - 4.2.2008",
+		"%ribbon_link": "https://en.wikipedia.org/wiki/Sheldon_Brown_(bicycle_mechanic)"
 	},
 	"hu": {
 	    "%title":"Mindentudó áttételkalkulátor",
