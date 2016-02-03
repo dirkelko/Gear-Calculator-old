@@ -30,8 +30,8 @@ String.toLocaleString({
 		"%tt_url": "use this URL to point to the currently selected gearing e.g. for referencing it in online discussions etc.",
 		"%tt_chain_angle": "sets the maximum allowed chain angle (approx. in degrees). Combinations where the chain runs too diagonal and should not be used are greyed out in the graphics.",
 		"%ribbontext_top": "Sheldon Brown",
-		"%ribbontext_sub": "1944-2008",
-		"%ribbon_link": "http://baltimorebikeexperience.com/Donate"
+		"%ribbontext_sub": "7/14/1944 - 2/4/2008",
+		"%ribbon_link": "https://en.wikipedia.org/wiki/Sheldon_Brown_(bicycle_mechanic)"
 	},
 	"es": {
 		"%title":"Calculador de desarrollos de bicicleta",
