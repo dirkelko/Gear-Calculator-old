@@ -4,10 +4,10 @@ var nMinChainringTeeth = 20;
 var nSelectableChainrings = nMaxChainringTeeth - nMinChainringTeeth;
 var nMaxNumberChainrings = 3;
 	
-var nMaxSprocketTeeth = 45;
+var nMaxSprocketTeeth = 50;
 var nMinSprocketTeeth = 9;
 var nSelectableSprockets = nMaxSprocketTeeth - nMinSprocketTeeth;
-var nMaxNumberSprockets = 11;
+var nMaxNumberSprockets = 12;
 
  //var gearSet = {};
  //var gearSet2 = {};
@@ -149,13 +149,13 @@ function updateGraphics(canvas, canvas2, gearSet, gearSet2){
 $(document).ready( function() {	
 	
     var aChainrings = ["00", "39", "53"];
-    var aSprockets = ["00","11","12","13","14","15","17","19","21","24","28"];
+    var aSprockets = ["00","00","11","12","13","14","15","17","19","21","24","28"];
     var aChainrings2 = ["00", "39", "53"];
-    var aSprockets2 = ["00","11","12","13","14","15","17","19","21","24","28"];
+    var aSprockets2 = ["00","00","11","12","13","14","15","17","19","21","24","28"];
     var aCopyChainrings = ["00", "39", "53"];
-    var aCopySprockets = ["00","11","12","13","14","15","17","19","21","24","27"];
+    var aCopySprockets = ["00","00","11","12","13","14","15","17","19","21","24","27"];
     var aCopyChainrings2 = ["00", "39", "53"];
-    var aCopySprockets2 = ["00","11","12","13","14","15","17","19","21","24","28"];
+    var aCopySprockets2 = ["00","00","11","12","13","14","15","17","19","21","24","28"];
     
     var gearSet = {};
     var gearSet2 = {};
@@ -747,8 +747,3 @@ $(document).ready( function() {
     });
 
 });
-
-
-
-
-
