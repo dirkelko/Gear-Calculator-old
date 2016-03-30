@@ -238,7 +238,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 				if (gearSet.ChainAngle[i][j] < dsplOps.maxChainAngle){
 					if (gearSet.isGearHub){
 						for ( k = 0; k < gearSet.HubGears.length; k++) {
-							ratios.push(gearSet.hubgears[i][j]*gearSet.HubGears[k]);
+							ratios.push(gearSet.hubGears[i][j]*gearSet.HubGears[k]);
 						}
 					} else {
 						ratios.push(gearSet.Ratios[i][j]);
