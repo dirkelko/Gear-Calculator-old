@@ -125,7 +125,7 @@ String.toLocaleString({
 		"%tt_compare": "Zeigt zum Vergleich die Grafik einer zweiten Schaltungsvariante",
 		"%tt_mail":"Kommentare und Anregungen sind erwünscht",
 		"%tt_moveCw": "Bewege das Kettenblatt auf der Skala um eine andere Zahnzahl auszuwählen",
-		"%tt_moveSp": "Bewege das Ritzel auf der Skala, um eine andere Zahmzahl auszuwählen",
+		"%tt_moveSp": "Bewege das Ritzel auf der Skala, um eine andere Zahnzahl auszuwählen",
 		"%tt_wheel_size":"Wähle eine gängige Reifengröße aus oder gebe den Umfang direkt in mm ein",
 		"%tt_display": "Zeigt die ausgewählten Werte zusätzlich numerisch an",
 		"%tt_units": "Auswahl zwischen SI (meter, km/h) und US (inch, mile) Einheiten",
