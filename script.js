@@ -36,8 +36,8 @@ var tireTypes =[];
     };
 
 // initial values
-var circumference = "2125";
-var circumference2 = "2125";
+var circumference = "2240";
+var circumference2 = "2240";
 var cadence = 90;
 
 //distance/mm between sprockets 
