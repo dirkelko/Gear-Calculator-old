@@ -1,16 +1,16 @@
 {
+  "data.json": "1459369686000",
+  "index.html": "1459285762000",
+  "README.md": "1420650007000",
+  "graphics.js": "1459286506000",
+  "localization.js": "1454857082000",
+  "script.js": "1459369765000",
+  "stylesheet.css": "1454535122000",
+  "news.css": "1432667885000",
+  "news_de.html": "1435002796000",
   "lib/jquery/jquery.ui.touch-punch.min.js": "1413452823000",
   "lib/l10n.js": "1419860733000",
-  "README.md": "1420650007000",
-  "data.json": "1459285717000",
-  "graphics.js": "1432302609000",
-  "index.html": "1459285762000",
-  "localization.js": "1454857082000",
-  "script.js": "1459285376000",
-  "stylesheet.css": "1454535122000",
   "images/Sprocket.png": "1413457837000",
   "images/Chainring.png": "1413457926000",
-  "images/HTML5_Logo_32.png": "1420754030000",
-  "news.css": "1432667885000",
-  "news_de.html": "1435002796000"
+  "images/HTML5_Logo_32.png": "1420754030000"
 }

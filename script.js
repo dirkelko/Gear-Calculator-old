@@ -41,7 +41,7 @@ var circumference2 = "2125";
 var cadence = 90;
 
 //distance/mm between sprockets 
-var distSprockets = [5.5, 5.5, 5.5, 5.5, 5.3, 5.0, 5.0, 4.8, 4.34, 3.95, 3.9]; 
+var distSprockets = [5.5, 5.5, 5.5, 5.5, 5.3, 5.0, 5.0, 4.8, 4.34, 3.95, 3.9, 3.5]; 
 var distChainrings = 5.0;
 
 // object for storing display options:
@@ -148,14 +148,14 @@ function updateGraphics(canvas, canvas2, gearSet, gearSet2){
 // Document ready for initializing the screen and defining the event handlers using jQuery 
 $(document).ready( function() {	
 	
-    var aChainrings = ["00", "39", "53"];
-    var aSprockets = ["00","00","11","12","13","14","15","17","19","21","24","28"];
-    var aChainrings2 = ["00", "39", "53"];
-    var aSprockets2 = ["00","00","11","12","13","14","15","17","19","21","24","28"];
-    var aCopyChainrings = ["00", "39", "53"];
-    var aCopySprockets = ["00","00","11","12","13","14","15","17","19","21","24","27"];
-    var aCopyChainrings2 = ["00", "39", "53"];
-    var aCopySprockets2 = ["00","00","11","12","13","14","15","17","19","21","24","28"];
+    var aChainrings = ["00", "22", "36"];
+    var aSprockets = ["00","00","11", "12", "14", "16", "18", "21", "24", "28", "32", "36"];
+    var aChainrings2 = ["00", "22", "36"];
+    var aSprockets2 = ["00","00","11", "12", "14", "16", "18", "21", "24", "28", "32", "36"];
+    var aCopyChainrings = ["00", "22", "36"];
+    var aCopySprockets = ["00","00","11", "12", "14", "16", "18", "21", "24", "28", "32", "36"];
+    var aCopyChainrings2 = ["00", "22", "36"];
+    var aCopySprockets2 = ["00","00","11", "12", "14", "16", "18", "21", "24", "28", "32", "36"];
     
     var gearSet = {};
     var gearSet2 = {};
