@@ -2,5 +2,10 @@
   "deploy": {
     "destination": "MY_NSP_ABAP",
     "name": "Z_GEAR_CALC"
+  },
+  "hcpdeploy": {
+    "account": "d022361trial",
+    "name": "gearcalculator",
+    "lastVersionWeTriedToDeploy": "1.0.0"
   }
 }

@@ -199,7 +199,7 @@
 	{ "id" : "SAX5", "name" : "Sturmey Archer X5",	"data" : "1.00,36,25,0.625,0.75,1.0,1.333,1.60" },
 	{ "id" : "SAS5", "name" : "Sturmey Archer S5",	"data" : "1.00,36,25,0.667,0.789,1.0,1.266,1.50" },
 	{ "id" : "SAAW", "name" : "Sturmey Archer AW",	"data" : "1.00,36,18,0.75,1.0,1.333" },
-	{ "id" : "BBWR", "name" : "Brompton BWR",	"data" : "1.00,50,16,0.638,1.0,1.567" }
+	{ "id" : "BBWR", "name" : "Brompton BWR",		"data" : "1.00,50,16,0.638,1.0,1.567" }
 ]
 
 }
