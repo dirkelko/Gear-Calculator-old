@@ -254,7 +254,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 	ctx.fillStyle = "rgb(150,150,150)";
 	ctx.textAlign = "left";
 	if (gearSet.hubType.id !== "DERS"){
-	    ctx.fillText( gearSet.hubType.name, 10, 181)
+	    ctx.fillText( gearSet.hubType.name, 10, 181);
 	}
 	ctx.fillText( "%wheel_size".toLocaleString() + " " + tireTypes.getNameByCircumference(gearSet.circumference), 10, 161);
 	ctx.fillRect(gX, gHeight -50, gWidth, 16);
