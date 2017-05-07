@@ -711,8 +711,8 @@ $(document).ready( function() {
     });
 
  	// create Slider for cadence selection
- 	$( "#cadenceSlider" ).slider({ min: 60 , max: 120, step: 1});
-    $( "#cadenceSlider" ).slider( "value", 90);
+ 	$( "#cadenceSlider" ).slider({ min: 40 , max: 140, step: 1});
+    $( "#cadenceSlider" ).slider( "value", cadence);
 	$( "#cadenceValue" ).html( cadence );
     // event handler for cadence slider
 	$("#cadenceSlider").on( "slide", function( event, ui ) {
