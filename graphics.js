@@ -190,8 +190,12 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
     					        ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* cadence * unitFactor).toPrecision(3), x, y - 16);
                                 break;
 			    case "speed-5":
-    					        ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* (cadence-5) * unitFactor).toPrecision(3), x-5, y - 16);
-						ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* (cadence+5) * unitFactor).toPrecision(3), x+5, y - 16);
+    					        ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* (cadence-5) * unitFactor).toPrecision(3), x-10, y - 16);
+						ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* (cadence+5) * unitFactor).toPrecision(3), x+10, y - 16);
+                                break;
+			    case "speed-10":
+    					        ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* (cadence-10) * unitFactor).toPrecision(3), x-10, y - 16);
+						ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* (cadence+10) * unitFactor).toPrecision(3), x+10, y - 16);
                                 break;
                             default:
                         }
