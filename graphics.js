@@ -168,7 +168,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 						var y_d;
 						while (k < 4) {
 							var diffratio_3 = (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
-							var diffratio_4 = (gearSet.Chainrings[i] / gearSet.Cogs[j]) - (gearSet.Chainrings[i-1] / gearSet.Cogs[j-k]);
+							//var diffratio_4 = (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
 							if (diffratio_3 < diff_ratio_2 && diffratio_3 > 0 && ((gearSet.Chainrings[i] / gearSet.Cogs[j]) / (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k])) < 0.965) {
 								y_d = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 2)) + gY -10.5;
 								x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j+k] * gearSet.circumference / 1000));
@@ -193,9 +193,9 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 								ctx.stroke();
 								ctx.closePath();
 							}
-							if (diffratio_4 < diff_ratio_1 && diffratio_4 < 0 && ((gearSet.Chainrings[i-1] / gearSet.Cogs[j-k]) / (gearSet.Chainrings[i] / gearSet.Cogs[j])) < 0.965) {
-								y_d = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 0)) + gY -10.5;
-								x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i-1] / gearSet.Cogs[j-k] * gearSet.circumference / 1000));
+							if (abs(diffratio_3) < diff_ratio_1 && diffratio_3 < 0 &&  ((gearSet.Chainrings[i+1] / gearSet.Cogs[j+k])) / (gearSet.Chainrings[i] / gearSet.Cogs[j]) < 0.965) {
+								y_d = Math.round(gHeight / (gearSet.Chainrings.length + 2) * (i + 0)) + gY -10.5;
+								x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j+k] * gearSet.circumference / 1000));
 								switch (k) {
 									case 0 :
 										ctx.strokeStyle = "#996633";
