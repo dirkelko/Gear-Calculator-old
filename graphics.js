@@ -194,6 +194,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 						ctx.beginPath();
 						ctx.moveTo(x, y);
 						ctx.lineTo(x_d, y_d);
+						ctx.fill();
 						ctx.closePath();
 					}
 					if (i == 1 || i == 2) {
