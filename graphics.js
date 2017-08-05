@@ -155,8 +155,6 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 	ctx.fillStyle = "#000000";
 	ctx.font = "bold 11px sans-serif";
 	var tSize = 12;
-	var x_d;
-	var y_d;
 	for ( i = 0; i < gearSet.Chainrings.length; i++) {
 		y = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 1)) + gY -10.5;
 		for ( var j = 0; j < gearSet.Cogs.length; j++) {
@@ -166,13 +164,17 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 					var diff_ratio_1 = (gearSet.Chainrings[i] / gearSet.Cogs[j-1]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
 					var diff_ratio_2 = (gearSet.Chainrings[i] / gearSet.Cogs[j]) - (gearSet.Chainrings[i] / gearSet.Cogs[j+1]);
 					if (i == 0 || i == 1) {
-						for (var k = 0; k < 4; k++) {
+						var k = 0;
+						var x_d;
+						var y_d;
+						while (k < 4) {
 							var diffratio_3 = (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
 							if (diffratio_3 < diff_ratio_2 && diffratio_3 > 0 && ((gearSet.Chainrings[i] / gearSet.Cogs[j]) / (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k])) < 0.95) {
 								y_d = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 2)) + gY -10.5;
 								x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j+k] * gearSet.circumference / 1000));
 								break;
 							}
+							k++;
 						}
 						switch (k) {
 							case 0 :
