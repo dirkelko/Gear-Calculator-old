@@ -162,6 +162,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 		for ( var j = 0; j < gearSet.Cogs.length; j++) {
 			if (gearSet.Chainrings[i] * gearSet.Cogs[j] !== 0) {
 				x = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i] / gearSet.Cogs[j] * gearSet.circumference / 1000));
+				console.log(gearSet.Chainrings.length);
 				if (gearSet.Chainrings.length == 3) {
 					console.log("test");
 					var diff_ratio_up = (gearSet.Chainrings[i] / gearSet.Cogs[j+1]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
