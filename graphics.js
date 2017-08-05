@@ -198,16 +198,16 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 								x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i-1] / gearSet.Cogs[j-k] * gearSet.circumference / 1000));
 								switch (k) {
 									case 0 :
-										ctx.strokeStyle = "#0000ff";
+										ctx.strokeStyle = "#996633";
 										break;
 									case 1 :
-										ctx.strokeStyle = "#00ff00";
+										ctx.strokeStyle = "#ff00ff";
 										break;
 									case 2 :
-										ctx.strokeStyle = "#ffff00";
+										ctx.strokeStyle = "#660066";
 										break;
 									case 3 :
-										ctx.strokeStyle = "#ff0000";
+										ctx.strokeStyle = "#ffcccc";
 										break;
 								}
 								ctx.lineWidth = 1;
