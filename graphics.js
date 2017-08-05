@@ -169,7 +169,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 						var y_d;
 						while (k < 4) {
 							var diffratio_3 = (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
-							if (diffratio_3 < diff_ratio_2 && diffratio_3 > 0 && ((gearSet.Chainrings[i] / gearSet.Cogs[j]) / (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k])) < 0.95) {
+							if (diffratio_3 < diff_ratio_2 && ((gearSet.Chainrings[i] / gearSet.Cogs[j]) / (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k])) < 0.965) {
 								y_d = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 2)) + gY -10.5;
 								x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j+k] * gearSet.circumference / 1000));
 								switch (k) {
@@ -180,10 +180,10 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 										ctx.strokeStyle = "#00ff00";
 										break;
 									case 2 :
-										ctx.strokeStyle = "#ff00ff";
+										ctx.strokeStyle = "#ffff00";
 										break;
 									case 3 :
-										ctx.strokeStyle = "#000000";
+										ctx.strokeStyle = "#ff0000";
 										break;
 								}
 								ctx.lineWidth = 1;
