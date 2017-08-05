@@ -26,7 +26,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 	// calculate the min and max values of the development scale ( 80%-115% of actual values);
 	var maxDev = maxDev * 1.15;
 	var minDev = minDev * 0.80;
-	
+
 	// Draw Rectangle
 	ctx.fillStyle = "#FFFFFF";
 	ctx.fillRect(gX, gY, gWidth, gHeight);
@@ -67,7 +67,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 			}
 		}
 	} else {
-		// draw scale for Gear Inches 
+		// draw scale for Gear Inches
 		var minGearInches = minDev * 100 / 2.54  / Math.PI;
 		var maxGearInches = maxDev * 100 / 2.54  / Math.PI;
 		var iMinGearInches = Math.floor(minGearInches);
@@ -142,24 +142,65 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 		ctx.beginPath();
 		ctx.fillStyle = "#e34c26";
 		//ctx.fillStyle = "#DD0000";
-		ctx.arc(gX + gWidth - 20 , y, 10, 0, Math.PI*2, true); 
+		ctx.arc(gX + gWidth - 20 , y, 10, 0, Math.PI*2, true);
 		ctx.closePath();
 		ctx.fill();
 		ctx.fillStyle = "#FFFFFF";
 		ctx.font = "bold 12px sans-serif";
 		ctx.fillText(gearSet.Chainrings[i].toString(), gX + gWidth -20, y + 4 );
 	}
-    
+
 	// Draw triangles for each Chainring Sprocket combination
 	var ratios = new Array();
 	ctx.fillStyle = "#000000";
 	ctx.font = "bold 11px sans-serif";
 	var tSize = 12;
+	var x_d;
+	var y_d;
 	for ( i = 0; i < gearSet.Chainrings.length; i++) {
 		y = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 1)) + gY -10.5;
 		for ( var j = 0; j < gearSet.Cogs.length; j++) {
 			if (gearSet.Chainrings[i] * gearSet.Cogs[j] !== 0) {
 				x = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i] / gearSet.Cogs[j] * gearSet.circumference / 1000));
+				if (gearSet.Chainrings.length == 3) {
+					var diff_ratio_up = (gearSet.Chainrings[i] / gearSet.Cogs[j+1]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
+					var diff_ratio_down = (gearSet.Chainrings[i] / gearSet.Cogs[j]) - (gearSet.Chainrings[i] / gearSet.Cogs[j-1]);
+					var ratio_up_next = [];
+					var ratio_down_next = [];
+					if (i == 0 || i == 1) {
+						for (var k = 0; k < 4; k++) {
+							ratio_up_next.push(gearSet.Chainrings[i+1] / gearSet.Cogs[j-k]);
+							if (ratio_up_next[k] - (gearSet.Chainrings[i] / gearSet.Cogs[j]) < diff_ratio_up) {
+								y_d = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 2)) + gY -10.5;
+								x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j-k] * gearSet.circumference / 1000));
+							}
+						}
+						switch (k) {
+							case 0 :
+								ctx.fillStyle = "#0000ff";
+								break;
+							case 1 :
+								ctx.fillStyle = "#00ff00";
+								break;
+							case 2 :
+								ctx.fillStyle = "#ff00ff";
+								break;
+							case 3 :
+								ctx.fillStyle = "#000000";
+								break;
+						}
+						ctx.beginPath();
+						ctx.moveTo(x, y);
+						ctx.lineTo(x_d, y_d);
+						ctx.closePath();
+					}
+					if (i == 1 || i == 2) {
+
+					}
+				}
+				if (gearSet.Chainrings.length == 2) {
+
+				}
 				if (x > gX + 12) {
 					ctx.beginPath();
 					//draw triangle for gear
@@ -210,7 +251,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 					        ctx.textAlign = "center";
 					    }
 						for ( var k = 0; k < gearSet.HubGears.length; k++) {
-							var xgh = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i] / gearSet.Cogs[j] 
+							var xgh = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i] / gearSet.Cogs[j]
 							    * gearSet.HubGears[k]*gearSet.circumference / 1000));
 							ctx.beginPath();
 							//draw triangle for gear
@@ -241,7 +282,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 						ctx.fillStyle = "rgb(200,200,200)";
 						ctx.fillText(gearSet.Cogs[j], x, y - 1);
 					}
-					
+
 				}
 				if (gearSet.ChainAngle[i][j] < dsplOps.maxChainAngle){
 					if (gearSet.isGearHub){
@@ -285,6 +326,6 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 	}
 	ctx.stroke();
 	ctx.closePath();
-	
+
 
 }
