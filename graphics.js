@@ -172,30 +172,30 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 							if (diffratio_3 < diff_ratio_2 && diffratio_3 > 0 && ((gearSet.Chainrings[i] / gearSet.Cogs[j]) / (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k])) < 0.95) {
 								y_d = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 2)) + gY -10.5;
 								x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j+k] * gearSet.circumference / 1000));
+								switch (k) {
+									case 0 :
+										ctx.strokeStyle = "#0000ff";
+										break;
+									case 1 :
+										ctx.strokeStyle = "#00ff00";
+										break;
+									case 2 :
+										ctx.strokeStyle = "#ff00ff";
+										break;
+									case 3 :
+										ctx.strokeStyle = "#000000";
+										break;
+								}
+								ctx.lineWidth = 1;
+								ctx.beginPath();
+								ctx.moveTo(x, y);
+								ctx.lineTo(x_d, y_d);
+								ctx.stroke();
+								ctx.closePath();
 								break;
 							}
 							k++;
 						}
-						switch (k) {
-							case 0 :
-								ctx.strokeStyle = "#0000ff";
-								break;
-							case 1 :
-								ctx.strokeStyle = "#00ff00";
-								break;
-							case 2 :
-								ctx.strokeStyle = "#ff00ff";
-								break;
-							case 3 :
-								ctx.strokeStyle = "#000000";
-								break;
-						}
-						ctx.lineWidth = 1;
-						ctx.beginPath();
-						ctx.moveTo(x, y);
-						ctx.lineTo(x_d, y_d);
-						ctx.stroke();
-						ctx.closePath();
 					}
 					if (i == 1 || i == 2) {
 
