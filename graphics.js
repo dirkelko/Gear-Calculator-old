@@ -175,6 +175,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 							if (ratio_up_next[k] - (gearSet.Chainrings[i] / gearSet.Cogs[j]) < diff_ratio_2) {
 								y_d = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 2)) + gY -10.5;
 								x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j+k] * gearSet.circumference / 1000));
+								break;
 							}
 						}
 						switch (k) {
