@@ -180,22 +180,23 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 						}
 						switch (k) {
 							case 0 :
-								ctx.fillStyle = "#0000ff";
+								ctx.strokeStyle = "#0000ff";
 								break;
 							case 1 :
-								ctx.fillStyle = "#00ff00";
+								ctx.strokeStyle = "#00ff00";
 								break;
 							case 2 :
-								ctx.fillStyle = "#ff00ff";
+								ctx.strokeStyle = "#ff00ff";
 								break;
 							case 3 :
-								ctx.fillStyle = "#000000";
+								ctx.strokeStyle = "#000000";
 								break;
 						}
+						ctx.lineWidth = 1;
 						ctx.beginPath();
 						ctx.moveTo(x, y);
 						ctx.lineTo(x_d, y_d);
-						ctx.fill();
+						ctx.stroke();
 						ctx.closePath();
 					}
 					if (i == 1 || i == 2) {
