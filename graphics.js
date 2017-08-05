@@ -165,16 +165,16 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 				console.log(gearSet.Chainrings.length);
 				if (gearSet.Chainrings.length == 3) {
 					console.log("test");
-					var diff_ratio_up = (gearSet.Chainrings[i] / gearSet.Cogs[j+1]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
-					var diff_ratio_down = (gearSet.Chainrings[i] / gearSet.Cogs[j]) - (gearSet.Chainrings[i] / gearSet.Cogs[j-1]);
+					var diff_ratio_up = (gearSet.Chainrings[i] / gearSet.Cogs[j-1]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
+					var diff_ratio_down = (gearSet.Chainrings[i] / gearSet.Cogs[j]) - (gearSet.Chainrings[i] / gearSet.Cogs[j+1]);
 					var ratio_up_next = [];
 					var ratio_down_next = [];
 					if (i == 0 || i == 1) {
 						for (var k = 0; k < 4; k++) {
-							ratio_up_next.push(gearSet.Chainrings[i+1] / gearSet.Cogs[j-k]);
+							ratio_up_next.push(gearSet.Chainrings[i+1] / gearSet.Cogs[j+k]);
 							if (ratio_up_next[k] - (gearSet.Chainrings[i] / gearSet.Cogs[j]) < diff_ratio_up) {
 								y_d = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 2)) + gY -10.5;
-								x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j-k] * gearSet.circumference / 1000));
+								x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j+k] * gearSet.circumference / 1000));
 							}
 						}
 						switch (k) {
