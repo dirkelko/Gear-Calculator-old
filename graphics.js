@@ -193,7 +193,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 								ctx.stroke();
 								ctx.closePath();
 							}
-							if (abs(diffratio_3) < diff_ratio_1 && diffratio_3 < 0 &&  ((gearSet.Chainrings[i+1] / gearSet.Cogs[j+k])) / (gearSet.Chainrings[i] / gearSet.Cogs[j]) < 0.965) {
+							if (Math.abs(diffratio_3) < diff_ratio_1 && diffratio_3 < 0 &&  ((gearSet.Chainrings[i+1] / gearSet.Cogs[j+k])) / (gearSet.Chainrings[i] / gearSet.Cogs[j]) < 0.965) {
 								y_d = Math.round(gHeight / (gearSet.Chainrings.length + 2) * (i + 0)) + gY -10.5;
 								x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j+k] * gearSet.circumference / 1000));
 								switch (k) {
