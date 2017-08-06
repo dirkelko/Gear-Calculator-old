@@ -161,66 +161,38 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 			if (gearSet.Chainrings[i] * gearSet.Cogs[j] !== 0) {
 				x = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i] / gearSet.Cogs[j] * gearSet.circumference / 1000));
 				if (gearSet.Chainrings.length == 3) {
-					var diff_ratio_1 = (gearSet.Chainrings[i] / gearSet.Cogs[j-1]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
-					var diff_ratio_2 = (gearSet.Chainrings[i] / gearSet.Cogs[j]) - (gearSet.Chainrings[i] / gearSet.Cogs[j+1]);
+					var diff_ratio_down = (gearSet.Chainrings[i] / gearSet.Cogs[j-1]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
+					var diff_ratio_up = (gearSet.Chainrings[i] / gearSet.Cogs[j]) - (gearSet.Chainrings[i] / gearSet.Cogs[j+1]);
 						var k = 0;
 						var x_d;
 						var y_d;
-						while (k < 4) {
+						var shiftStyle = ["#0000ff", "#9400d3", "#0000ff", "#00ff00", "#ffff00", "#ff7f00", "#ff0000"];
+						while (k < 7) {
+							var draw_shift_path = false;
 							var diffratio_3 = (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
 							//var diffratio_4 = (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
-							if (diffratio_3 < diff_ratio_2 && diffratio_3 > 0 && ((gearSet.Chainrings[i] / gearSet.Cogs[j]) / (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k])) < 0.965) {
+							if (diffratio_3 < diff_ratio_up && diffratio_3 > 0 && ((gearSet.Chainrings[i+1] / gearSet.Cogs[j+k]) / (gearSet.Chainrings[i] / gearSet.Cogs[j-1])) < 0.965) {
 								y_d = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 2)) + gY -10.5;
 								x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j+k] * gearSet.circumference / 1000));
-								switch (k) {
-									case 0 :
-										ctx.strokeStyle = "#0000ff";
-										break;
-									case 1 :
-										ctx.strokeStyle = "#00ff00";
-										break;
-									case 2 :
-										ctx.strokeStyle = "#ffff00";
-										break;
-									case 3 :
-										ctx.strokeStyle = "#ff0000";
-										break;
-								}
-								ctx.lineWidth = 1;
-								ctx.beginPath();
-								ctx.moveTo(x, y);
-								ctx.lineTo(x_d, y_d);
-								ctx.stroke();
-								ctx.closePath();
+								draw_shift_path = true;
 							}
-							if (Math.abs(diffratio_3) < diff_ratio_1 && diffratio_3 < 0 &&  ((gearSet.Chainrings[i+1] / gearSet.Cogs[j+k])) / (gearSet.Chainrings[i] / gearSet.Cogs[j]) < 0.965) {
+							else if (Math.abs(diffratio_3) < diff_ratio_down && diffratio_3 < 0 &&  ((gearSet.Chainrings[i] / gearSet.Cogs[j+1]) / (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k])) < 0.965) {
 								y_d = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 2)) + gY -10.5;
 								x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j+k] * gearSet.circumference / 1000));
-								switch (k) {
-									case 0 :
-										ctx.strokeStyle = "#996633";
-										break;
-									case 1 :
-										ctx.strokeStyle = "#ff00ff";
-										break;
-									case 2 :
-										ctx.strokeStyle = "#660066";
-										break;
-									case 3 :
-										ctx.strokeStyle = "#ffcccc";
-										break;
-								}
+								draw_shift_path = true;
+							}
+							if (draw_shift_path) {
+								ctx.strokeStyle = shiftStyle[k];
 								ctx.lineWidth = 1;
 								ctx.beginPath();
 								ctx.moveTo(x, y);
 								ctx.lineTo(x_d, y_d);
 								ctx.stroke();
 								ctx.closePath();
-
 							}
 							k++;
 						}
-
+					}
 				}
 
 				if (x > gX + 12) {
