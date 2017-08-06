@@ -160,27 +160,23 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 		for ( var j = 0; j < gearSet.Cogs.length; j++) {
 			if (gearSet.Chainrings[i] * gearSet.Cogs[j] !== 0) {
 				x = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i] / gearSet.Cogs[j] * gearSet.circumference / 1000));
-				var diff_ratio_down = (gearSet.Chainrings[i] / gearSet.Cogs[j-1]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
-				var diff_ratio_up = (gearSet.Chainrings[i] / gearSet.Cogs[j]) - (gearSet.Chainrings[i] / gearSet.Cogs[j+1]);
+				//var diff_ratio_down = (gearSet.Chainrings[i] / gearSet.Cogs[j-1]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
+				//var diff_ratio_up = (gearSet.Chainrings[i] / gearSet.Cogs[j]) - (gearSet.Chainrings[i] / gearSet.Cogs[j+1]);
 				var k = 0;
 				var x_d;
 				var y_d;
 				var shiftStyle = ["#000000", "#00ff00", "#ffff00", "#ff7f00", "#ff0000", "#0000ff", "#9400d3"];
 				while (k < 7) {
-					var draw_shift_path = false;
-					var diffratio_3 = (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
+					//var draw_shift_path = false;
+					//var diffratio_3 = (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
 					//var diffratio_4 = (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
-					if (diffratio_3 < diff_ratio_up && diffratio_3 > 0 && ((gearSet.Chainrings[i+1] / gearSet.Cogs[j+k]) / (gearSet.Chainrings[i] / gearSet.Cogs[j-1])) < 0.965) {
+					var cur_rat = gearSet.Chainrings[i] / gearSet.Cogs[j];
+					var prop_rat = gearSet.Chainrings[i+1] / gearSet.Cogs[j+k];
+					var diff_rat = Math.abs(cur_rat - prop_rat);
+					var max_rat = Math.max(cur_rat, prop_rat);
+					if (diff_rat / max_rat < 0.14 && diff_rat / max_rat > 0.025) {
 						y_d = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 2)) + gY -10.5;
 						x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j+k] * gearSet.circumference / 1000));
-						draw_shift_path = true;
-					}
-					else if (Math.abs(diffratio_3) < diff_ratio_down && diffratio_3 < 0 &&  ((gearSet.Chainrings[i] / gearSet.Cogs[j+1]) / (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k])) < 0.965) {
-						y_d = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 2)) + gY -10.5;
-						x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j+k] * gearSet.circumference / 1000));
-						draw_shift_path = true;
-					}
-					if (draw_shift_path) {
 						ctx.strokeStyle = shiftStyle[k];
 						ctx.lineWidth = 1;
 						ctx.beginPath();
@@ -189,6 +185,12 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 						ctx.stroke();
 						ctx.closePath();
 					}
+					/*else if (Math.abs(diffratio_3) < diff_ratio_down && diffratio_3 < 0 &&  ((gearSet.Chainrings[i] / gearSet.Cogs[j+1]) / (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k])) < 0.965) {
+						y_d = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 2)) + gY -10.5;
+						x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j+k] * gearSet.circumference / 1000));
+						draw_shift_path = true;
+					}*/
+
 					k++;
 				}
 			}
