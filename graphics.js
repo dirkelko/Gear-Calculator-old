@@ -211,25 +211,25 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 					ctx.fillText(gearSet.Cogs[j], x, y - 1);
 					ctx.fillStyle = "rgb(00,00,00)";
 					if (!gearSet.isGearHub){
-                        switch(dsplOps.values) {
-                            case "ratio":
-    					        					ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]).toPrecision(3), x, y - 16);
-                                break;
-                            case "development":
-    					        					ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000).toPrecision(3), x, y - 16);
-                                break;
-                            case "gear_inches":
-    					        					ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/25.4/3.1415927).toPrecision(3), x, y - 16);
-                                break;
-                            case "speed":
-    					        					ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* cadence * unitFactor).toPrecision(3), x, y - 16);
-                                break;
-			    									case "speed-с":
-    					        					ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* (cadence-parseInt($("#cadence_diff").val())) * unitFactor).toPrecision(3), x-15, y + 16);
-																ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* (cadence+parseInt($("#cadence_diff").val())) * unitFactor).toPrecision(3), x+15, y - 16);
-                                break;
-                            default:
-                        }
+						switch(dsplOps.values) {
+							case "ratio":
+								ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]).toPrecision(3), x, y - 16);
+								break;
+							case "development":
+								ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000).toPrecision(3), x, y - 16);
+								break;
+							case "gear_inches":
+								ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/25.4/3.1415927).toPrecision(3), x, y - 16);
+								break;
+							case "speed":
+								ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* cadence * unitFactor).toPrecision(3), x, y - 16);
+								break;
+							case "speed-с":
+								ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* (cadence-parseInt($("#cadence_diff").val())) * unitFactor).toPrecision(3), x-15, y + 16);
+								ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* (cadence+parseInt($("#cadence_diff").val())) * unitFactor).toPrecision(3), x+15, y - 16);
+								break;
+							default:
+						}
 					}
 
 					// draw additional triangles for gear hubs
