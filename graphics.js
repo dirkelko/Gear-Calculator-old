@@ -165,7 +165,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 				var k = 0;
 				var x_d;
 				var y_d;
-				var shiftStyle = ["#0000ff", "#9400d3", "#0000ff", "#00ff00", "#ffff00", "#ff7f00", "#ff0000"];
+				var shiftStyle = ["#000000", "#00ff00", "#ffff00", "#ff7f00", "#ff0000", "#0000ff", "#9400d3"];
 				while (k < 7) {
 					var draw_shift_path = false;
 					var diffratio_3 = (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
