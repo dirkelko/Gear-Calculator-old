@@ -756,7 +756,7 @@ $(document).ready( function() {
 		    	//console.log($("#slider").slider("value"));
 		    	cross_min = ui.value;
 		        //cadence = $("#cadenceSlider").slider("value");
-		        $("#cross_min").html( cross_min );
+		        $("#cross_minValue").html( cross_min );
 				var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
 				var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
 		        updateGraphics(canvas, canvas2, gearSet, gearSet2);
