@@ -344,7 +344,74 @@ $(document).ready( function() {
 
 	// make the Chainrings movable
 	$(".Chainring").draggable({ axis: "x", containment: "parent" });
+	// create Slider for cadence selection
+	$( "#cadenceSlider" ).slider({ min: 40 , max: 140, step: 1});
+	$( "#cadenceSlider" ).slider( "value", cadence);
+	$( "#cadenceValue" ).html( cadence );
+	$( "#cross_minSlider" ).slider({ min: 0.01 , max: 0.50, step: 0.001});
+	$( "#cross_minSlider" ).slider( "value", cross_min);
+	$( "#cross_minValue" ).html( cross_min );
+	$( "#cross_maxSlider" ).slider({ min: 0.01 , max: 0.50, step: 0.001});
+	$( "#cross_maxSlider" ).slider( "value", cross_max);
+	$( "#cross_maxValue" ).html( cross_max );
+	$( "#cross_sSlider" ).slider({ min: 1 , max: 6, step: 1});
+	$( "#cross_sSlider" ).slider( "value", cross_s);
+	$( "#cross_sValue" ).html( cross_s );
+	$( "#cadencedSlider" ).slider({ min: 1 , max: 20, step: 1});
+	$( "#cadencedSlider" ).slider( "value", cadenced);
+	$( "#cadencedValue" ).html( cadenced );
+		// event handler for cadence slider
+	$("#cadenceSlider").on( "slide", function( event, ui ) {
+			//console.log($("#slider").slider("value"));
+			cadence = ui.value;
+				//cadence = $("#cadenceSlider").slider("value");
+				$("#cadenceValue").html( cadence );
+		var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
+		var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
+				updateGraphics(canvas, canvas2, gearSet, gearSet2);
+		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
+		});
 
+		$("#cadencedSlider").on( "slide", function( event, ui ) {
+				//console.log($("#slider").slider("value"));
+				cadenced = ui.value;
+					//cadence = $("#cadenceSlider").slider("value");
+					$("#cadencedValue").html( cadenced );
+			var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
+			var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
+					updateGraphics(canvas, canvas2, gearSet, gearSet2);
+			$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
+			});
+			$("#cross_minSlider").on( "slide", function( event, ui ) {
+					//console.log($("#slider").slider("value"));
+					cross_min = ui.value;
+						//cadence = $("#cadenceSlider").slider("value");
+						$("#cross_minValue").html( cross_min );
+				var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
+				var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
+						updateGraphics(canvas, canvas2, gearSet, gearSet2);
+				$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
+				});
+				$("#cross_maxSlider").on( "slide", function( event, ui ) {
+						//console.log($("#slider").slider("value"));
+						cross_max = ui.value;
+							//cadence = $("#cadenceSlider").slider("value");
+							$("#cross_maxValue").html( cross_max );
+					var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
+					var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
+							updateGraphics(canvas, canvas2, gearSet, gearSet2);
+					$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
+					});
+					$("#cross_sSlider").on( "slide", function( event, ui ) {
+							//console.log($("#slider").slider("value"));
+							cross_s = ui.value;
+								//cadence = $("#cadenceSlider").slider("value");
+								$("#cross_sValue").html( cross_s );
+						var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
+						var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
+								updateGraphics(canvas, canvas2, gearSet, gearSet2);
+						$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
+						});
 	// draw graphics in canvas element
 	var canvas = $("#myCanvas")[0]; //[0] gets the first element from the selector's collection
 	if (canvas.getContext){
@@ -713,75 +780,6 @@ $(document).ready( function() {
         updateGraphics(canvas, canvas2, gearSet, gearSet2);
 		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
     });
-
- 	// create Slider for cadence selection
- 	$( "#cadenceSlider" ).slider({ min: 40 , max: 140, step: 1});
-	$( "#cadenceSlider" ).slider( "value", cadence);
-	$( "#cadenceValue" ).html( cadence );
-	$( "#cross_minSlider" ).slider({ min: 0.01 , max: 0.50, step: 0.001});
-	$( "#cross_minSlider" ).slider( "value", cross_min);
-	$( "#cross_minValue" ).html( cross_min );
-	$( "#cross_maxSlider" ).slider({ min: 0.01 , max: 0.50, step: 0.001});
-	$( "#cross_maxSlider" ).slider( "value", cross_max);
-	$( "#cross_maxValue" ).html( cross_max );
-	$( "#cross_sSlider" ).slider({ min: 1 , max: 6, step: 1});
-	$( "#cross_sSlider" ).slider( "value", cross_s);
-	$( "#cross_sValue" ).html( cross_s );
-	$( "#cadencedSlider" ).slider({ min: 1 , max: 20, step: 1});
-	$( "#cadencedSlider" ).slider( "value", cadenced);
-	$( "#cadencedValue" ).html( cadenced );
-    // event handler for cadence slider
-	$("#cadenceSlider").on( "slide", function( event, ui ) {
-    	//console.log($("#slider").slider("value"));
-    	cadence = ui.value;
-        //cadence = $("#cadenceSlider").slider("value");
-        $("#cadenceValue").html( cadence );
-		var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
-		var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-        updateGraphics(canvas, canvas2, gearSet, gearSet2);
-		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
-    });
-
-		$("#cadencedSlider").on( "slide", function( event, ui ) {
-	    	//console.log($("#slider").slider("value"));
-	    	cadenced = ui.value;
-	        //cadence = $("#cadenceSlider").slider("value");
-	        $("#cadencedValue").html( cadenced );
-			var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
-			var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-	        updateGraphics(canvas, canvas2, gearSet, gearSet2);
-			$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
-	    });
-			$("#cross_minSlider").on( "slide", function( event, ui ) {
-		    	//console.log($("#slider").slider("value"));
-		    	cross_min = ui.value;
-		        //cadence = $("#cadenceSlider").slider("value");
-		        $("#cross_minValue").html( cross_min );
-				var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
-				var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-		        updateGraphics(canvas, canvas2, gearSet, gearSet2);
-				$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
-		    });
-				$("#cross_maxSlider").on( "slide", function( event, ui ) {
-			    	//console.log($("#slider").slider("value"));
-			    	cross_max = ui.value;
-			        //cadence = $("#cadenceSlider").slider("value");
-			        $("#cross_maxValue").html( cross_max );
-					var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
-					var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-			        updateGraphics(canvas, canvas2, gearSet, gearSet2);
-					$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
-			    });
-					$("#cross_sSlider").on( "slide", function( event, ui ) {
-				    	//console.log($("#slider").slider("value"));
-				    	cross_s = ui.value;
-				        //cadence = $("#cadenceSlider").slider("value");
-				        $("#cross_sValue").html( cross_s );
-						var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
-						var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-				        updateGraphics(canvas, canvas2, gearSet, gearSet2);
-						$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
-				    });
 
 	$("#close_ribbon").click( function(){
         $("#ribbon-banner").hide();
