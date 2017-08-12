@@ -257,6 +257,15 @@ label{
 #cadencedValue{
     padding: 0 0 0 55px;
 }
+#cross_minValue{
+    padding: 0 0 0 55px;
+}
+#cross_maxValue{
+    padding: 0 0 0 55px;
+}
+#cross_sValue{
+    padding: 0 0 0 55px;
+}
 #chainAngleValue{
     padding: 0 0 0 5px;
 }

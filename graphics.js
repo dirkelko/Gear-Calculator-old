@@ -166,7 +166,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 				var x_d;
 				var y_d;
 				var shiftStyle = ["#000000", "#00ff00", "#ffff00", "#ff7f00", "#ff0000", "#0000ff", "#9400d3"];
-				while (k < 7) {
+				while (k < parseInt($("#cross_sValue").html())+1) {
 					//var draw_shift_path = false;
 					//var diffratio_3 = (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
 					//var diffratio_4 = (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
@@ -174,7 +174,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 					var prop_rat = gearSet.Chainrings[i+1] / gearSet.Cogs[j+k];
 					var diff_rat = Math.abs(cur_rat - prop_rat);
 					var max_rat = Math.max(cur_rat, prop_rat);
-					if (diff_rat / max_rat < 0.14 && diff_rat / max_rat > 0.025) {
+					if (diff_rat / max_rat < parseInt($("#cross_maxValue").html()) && diff_rat / max_rat > parseInt($("#cross_minsValue").html())) {
 						y_d = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 2)) + gY -10.5;
 						x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j+k] * gearSet.circumference / 1000));
 						ctx.strokeStyle = shiftStyle[k];
