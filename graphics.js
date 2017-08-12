@@ -215,7 +215,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 							case "ratio":
 								ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]).toPrecision(3), x, y - 16);
 								if (j>0) {
-									ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j-1] - gearSet.Chainrings[i]/gearSet.Cogs[j]).toPrecision(3), x + 22, y + 16);
+									ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j-1] - gearSet.Chainrings[i]/gearSet.Cogs[j]).toPrecision(2), x + 22, y + 16);
 								}
 								break;
 							case "development":

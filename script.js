@@ -39,7 +39,7 @@ var tireTypes =[];
 var circumference = "2240";
 var circumference2 = "2240";
 var cadence = 90;
-var cadence_diff = 5;
+var cadenced = 5;
 
 //distance/mm between sprockets
 var distSprockets = [5.5, 5.5, 5.5, 5.5, 5.3, 5.0, 5.0, 4.8, 4.34, 3.95, 3.9, 3.5];
@@ -713,8 +713,11 @@ $(document).ready( function() {
 
  	// create Slider for cadence selection
  	$( "#cadenceSlider" ).slider({ min: 40 , max: 140, step: 1});
-    $( "#cadenceSlider" ).slider( "value", cadence);
+	$( "#cadenceSlider" ).slider( "value", cadence);
 	$( "#cadenceValue" ).html( cadence );
+	$( "#cadencedSlider" ).slider({ min: 1 , max: 20, step: 1});
+	$( "#cadencedSlider" ).slider( "value", cadenced);
+	$( "#cadencedValue" ).html( cadenced );
     // event handler for cadence slider
 	$("#cadenceSlider").on( "slide", function( event, ui ) {
     	//console.log($("#slider").slider("value"));
@@ -726,6 +729,17 @@ $(document).ready( function() {
         updateGraphics(canvas, canvas2, gearSet, gearSet2);
 		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
     });
+
+		$("#cadencedSlider").on( "slide", function( event, ui ) {
+	    	//console.log($("#slider").slider("value"));
+	    	cadenced = ui.value;
+	        //cadence = $("#cadenceSlider").slider("value");
+	        $("#cadencedValue").html( cadenced );
+			var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
+			var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
+	        updateGraphics(canvas, canvas2, gearSet, gearSet2);
+			$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
+	    });
 
 	$("#close_ribbon").click( function(){
         $("#ribbon-banner").hide();
