@@ -228,8 +228,8 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 								ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* cadence * unitFactor).toPrecision(3), x, y - 16);
 								break;
 							case "speed-c":
-								ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* (cadence-parseInt($("#cadence_diff").val())) * unitFactor).toPrecision(3), x-15, y + 16);
-								ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* (cadence+parseInt($("#cadence_diff").val())) * unitFactor).toPrecision(3), x+15, y - 16);
+								ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* (cadence-parseInt($("#cadencedValue").val())) * unitFactor).toPrecision(3), x-15, y + 16);
+								ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* (cadence+parseInt($("#cadencedValue").val())) * unitFactor).toPrecision(3), x+15, y - 16);
 								break;
 							default:
 						}
