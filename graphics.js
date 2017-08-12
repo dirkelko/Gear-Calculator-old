@@ -174,7 +174,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 					var prop_rat = gearSet.Chainrings[i+1] / gearSet.Cogs[j+k];
 					var diff_rat = Math.abs(cur_rat - prop_rat);
 					var max_rat = Math.max(cur_rat, prop_rat);
-					if (diff_rat / max_rat < parseFloat($("#cross_maxValue").html()) && diff_rat / max_rat > parseFloat($("#cross_minValue").html())) {
+					if (diff_rat / max_rat < parseFloat($("#cross_maxValue").html())/100 && diff_rat / max_rat > parseFloat($("#cross_minValue").html())/100) {
 						y_d = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 2)) + gY -10.5;
 						x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j+k] * gearSet.circumference / 1000));
 						ctx.strokeStyle = shiftStyle[k];

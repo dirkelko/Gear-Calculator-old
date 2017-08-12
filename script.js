@@ -40,8 +40,8 @@ var circumference = "2240";
 var circumference2 = "2240";
 var cadence = 90;
 var cadenced = 5;
-var cross_min = 0.025;
-var cross_max = 0.14;
+var cross_min = 2.5;
+var cross_max = 14;
 var cross_s = 3;
 
 //distance/mm between sprockets
@@ -348,10 +348,10 @@ $(document).ready( function() {
 	$( "#cadenceSlider" ).slider({ min: 40 , max: 140, step: 1});
 	$( "#cadenceSlider" ).slider( "value", cadence);
 	$( "#cadenceValue" ).html( cadence );
-	$( "#cross_minSlider" ).slider({ min: 0.01 , max: 0.50, step: 0.001});
+	$( "#cross_minSlider" ).slider({ min: 1 , max: 100, step: 0.1});
 	$( "#cross_minSlider" ).slider( "value", cross_min);
 	$( "#cross_minValue" ).html( cross_min );
-	$( "#cross_maxSlider" ).slider({ min: 0.01 , max: 0.50, step: 0.001});
+	$( "#cross_maxSlider" ).slider({ min: 1 , max: 100, step: 0.1});
 	$( "#cross_maxSlider" ).slider( "value", cross_max);
 	$( "#cross_maxValue" ).html( cross_max );
 	$( "#cross_sSlider" ).slider({ min: 1 , max: 6, step: 1});
