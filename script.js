@@ -720,13 +720,13 @@ $(document).ready( function() {
 	$( "#cadenceValue" ).html( cadence );
 	$( "#cross_minSlider" ).slider({ min: 0.01 , max: 0.50, step: 0.001});
 	$( "#cross_minSlider" ).slider( "value", cross_min);
-	$( "#cross_minSlider" ).html( cross_min );
+	$( "#cross_minValue" ).html( cross_min );
 	$( "#cross_maxSlider" ).slider({ min: 0.01 , max: 0.50, step: 0.001});
 	$( "#cross_maxSlider" ).slider( "value", cross_max);
-	$( "#cross_maxSlider" ).html( cross_max );
+	$( "#cross_maxValue" ).html( cross_max );
 	$( "#cross_sSlider" ).slider({ min: 1 , max: 6, step: 1});
 	$( "#cross_sSlider" ).slider( "value", cross_s);
-	$( "#cross_sSlider" ).html( cross_s );
+	$( "#cross_sValue" ).html( cross_s );
 	$( "#cadencedSlider" ).slider({ min: 1 , max: 20, step: 1});
 	$( "#cadencedSlider" ).slider( "value", cadenced);
 	$( "#cadencedValue" ).html( cadenced );
