@@ -131,7 +131,7 @@ String.toLocaleString({
 		"%tt_units": "Auswahl zwischen SI (meter, km/h) und US (inch, mile) Einheiten",
 		"%tt_url": "Diese URL zeigt direkt die gerade ausgewählte Schaltung an und kann z.B. als Referenz in Online Diskussionen verwendet werden",
 		"%tt_chain_angle": "Setzt den maximal erlaubten Kettenschräglauf (näherungsweise in Grad). Kombinationen, bei denen die Kette schräger läuft als dieser Wert, werden in der Grafik ausgegraut.",
-		"%ribbontext_top": "VELOWINO",
+		"%ribbontext_top": "",
 		"%ribbontext_sub": "Weinheim 10. Sept. 2017",
 		"%ribbon_link": "http://velowino.de"
 	},
