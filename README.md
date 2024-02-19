@@ -1,4 +1,4 @@
-# Gear-Calculator (outdated! see Gear-Calculator-UI5 istead!)
+# Gear-Calculator (outdated! see [Gear-Calculator-UI5](../Gear-Calculator-UI5/) instead!)
 Online calculator for configuring and comparing bicycle gearing systems
 
 The gear calculator (or in German Ritzelrechner) is an ongoing training project of mine to learn different programming languages and technologies like Java, Flex, Javascript, CSS ...and now Git.
