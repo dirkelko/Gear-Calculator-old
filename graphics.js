@@ -26,7 +26,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 	// calculate the min and max values of the development scale ( 80%-115% of actual values);
 	var maxDev = maxDev * 1.15;
 	var minDev = minDev * 0.80;
-	
+
 	// Draw Rectangle
 	ctx.fillStyle = "#FFFFFF";
 	ctx.fillRect(gX, gY, gWidth, gHeight);
@@ -67,7 +67,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 			}
 		}
 	} else {
-		// draw scale for Gear Inches 
+		// draw scale for Gear Inches
 		var minGearInches = minDev * 100 / 2.54  / Math.PI;
 		var maxGearInches = maxDev * 100 / 2.54  / Math.PI;
 		var iMinGearInches = Math.floor(minGearInches);
@@ -142,14 +142,14 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 		ctx.beginPath();
 		ctx.fillStyle = "#e34c26";
 		//ctx.fillStyle = "#DD0000";
-		ctx.arc(gX + gWidth - 20 , y, 10, 0, Math.PI*2, true); 
+		ctx.arc(gX + gWidth - 20 , y, 10, 0, Math.PI*2, true);
 		ctx.closePath();
 		ctx.fill();
 		ctx.fillStyle = "#FFFFFF";
 		ctx.font = "bold 12px sans-serif";
 		ctx.fillText(gearSet.Chainrings[i].toString(), gX + gWidth -20, y + 4 );
 	}
-    
+
 	// Draw triangles for each Chainring Sprocket combination
 	var ratios = new Array();
 	ctx.fillStyle = "#000000";
@@ -160,7 +160,42 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 		for ( var j = 0; j < gearSet.Cogs.length; j++) {
 			if (gearSet.Chainrings[i] * gearSet.Cogs[j] !== 0) {
 				x = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i] / gearSet.Cogs[j] * gearSet.circumference / 1000));
-				if (x > gX + 12) {
+				//var diff_ratio_down = (gearSet.Chainrings[i] / gearSet.Cogs[j-1]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
+				//var diff_ratio_up = (gearSet.Chainrings[i] / gearSet.Cogs[j]) - (gearSet.Chainrings[i] / gearSet.Cogs[j+1]);
+				var k = 0;
+				var x_d;
+				var y_d;
+				var shiftStyle = ["#000000", "#00ff00", "#ffff00", "#ff7f00", "#ff0000", "#0000ff", "#9400d3"];
+				while (k < parseInt($("#cross_sValue").html())+1) {
+					//var draw_shift_path = false;
+					//var diffratio_3 = (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
+					//var diffratio_4 = (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k]) - (gearSet.Chainrings[i] / gearSet.Cogs[j]);
+					var cur_rat = gearSet.Chainrings[i] / gearSet.Cogs[j];
+					var prop_rat = gearSet.Chainrings[i+1] / gearSet.Cogs[j+k];
+					var diff_rat = Math.abs(cur_rat - prop_rat);
+					var min_rat = Math.min(cur_rat, prop_rat);
+					if (diff_rat / min_rat < parseFloat($("#cross_maxValue").html())/100 && diff_rat / min_rat > parseFloat($("#cross_minValue").html())/100) {
+						y_d = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 2)) + gY -10.5;
+						x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j+k] * gearSet.circumference / 1000));
+						ctx.strokeStyle = shiftStyle[k];
+						ctx.lineWidth = 1;
+						ctx.beginPath();
+						ctx.moveTo(x, y);
+						ctx.lineTo(x_d, y_d);
+						ctx.stroke();
+						ctx.closePath();
+					}
+					/*else if (Math.abs(diffratio_3) < diff_ratio_down && diffratio_3 < 0 &&  ((gearSet.Chainrings[i] / gearSet.Cogs[j+1]) / (gearSet.Chainrings[i+1] / gearSet.Cogs[j+k])) < 0.965) {
+						y_d = Math.round(gHeight / (gearSet.Chainrings.length + 1) * (i + 2)) + gY -10.5;
+						x_d = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i+1] / gearSet.Cogs[j+k] * gearSet.circumference / 1000));
+						draw_shift_path = true;
+					}*/
+
+					k++;
+				}
+			}
+
+			if (x > gX + 12) {
 					ctx.beginPath();
 					//draw triangle for gear
 					ctx.moveTo(x - tSize, y - tSize);
@@ -176,21 +211,28 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 					ctx.fillText(gearSet.Cogs[j], x, y - 1);
 					ctx.fillStyle = "rgb(00,00,00)";
 					if (!gearSet.isGearHub){
-                        switch(dsplOps.values) {
-                            case "ratio":
-    					        ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]).toPrecision(3), x, y - 16);
-                                break;
-                            case "development":
-    					        ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000).toPrecision(3), x, y - 16);
-                                break;
-                            case "gear_inches":
-    					        ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/25.4/3.1415927).toPrecision(3), x, y - 16);
-                                break;
-                            case "speed":
-    					        ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* cadence * unitFactor).toPrecision(3), x, y - 16);
-                                break;
-                            default:
-                        }
+						switch(dsplOps.values) {
+							case "ratio":
+								ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]).toPrecision(3), x, y - 16);
+								if (j>0) {
+									ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j-1] - gearSet.Chainrings[i]/gearSet.Cogs[j]).toPrecision(2), x + 22, y + 16);
+								}
+								break;
+							case "development":
+								ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000).toPrecision(3), x, y - 16);
+								break;
+							case "gear_inches":
+								ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/25.4/3.1415927).toPrecision(3), x, y - 16);
+								break;
+							case "speed":
+								ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* cadence * unitFactor).toPrecision(3), x, y - 16);
+								break;
+							case "speed-c":
+								ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* (cadence-parseInt($("#cadencedValue").html())) * unitFactor).toPrecision(3), x-15, y + 16);
+								ctx.fillText((gearSet.Chainrings[i]/gearSet.Cogs[j]*gearSet.circumference/1000* (cadence+parseInt($("#cadencedValue").html())) * unitFactor).toPrecision(3), x+15, y - 16);
+								break;
+							default:
+						}
 					}
 
 					// draw additional triangles for gear hubs
@@ -202,7 +244,7 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 					        ctx.textAlign = "center";
 					    }
 						for ( var k = 0; k < gearSet.HubGears.length; k++) {
-							var xgh = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i] / gearSet.Cogs[j] 
+							var xgh = gX + Math.round(xLog(minDev, maxDev, gWidth, gearSet.Chainrings[i] / gearSet.Cogs[j]
 							    * gearSet.HubGears[k]*gearSet.circumference / 1000));
 							ctx.beginPath();
 							//draw triangle for gear
@@ -233,9 +275,9 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 						ctx.fillStyle = "rgb(200,200,200)";
 						ctx.fillText(gearSet.Cogs[j], x, y - 1);
 					}
-					
+
 				}
-				if (gearSet.ChainAngle[i][j] < dsplOps.maxChainAngle){
+			if (gearSet.ChainAngle[i][j] < dsplOps.maxChainAngle){
 					if (gearSet.isGearHub){
 						for ( k = 0; k < gearSet.HubGears.length; k++) {
 							ratios.push(gearSet.Ratios[i][j]*gearSet.HubGears[k]);
@@ -244,9 +286,9 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 						ratios.push(gearSet.Ratios[i][j]);
 					}
 				}
-			}
 		}
 	}
+
 
 	// draw rectangle with ticks for each possible gear and display gear steps
 	ratios.sort(function(a,b){return a-b;});
@@ -277,6 +319,6 @@ function drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps) {
 	}
 	ctx.stroke();
 	ctx.closePath();
-	
+
 
 }

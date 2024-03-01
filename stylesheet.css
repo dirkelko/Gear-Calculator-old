@@ -12,7 +12,7 @@ body{
     margin: 0;
 	font-family: Arial, sans-serif;
 
-    
+
 }
 
 div {
@@ -38,14 +38,14 @@ div {
 }
 
 #calcControls{
-	height: 200px;
+	height: 250px;
 }
 
 .innerArea {
 	display:inline-block;
 	-moz-box-sizing:border-box; /* Firefox */
 	-webkit-box-sizing:border-box;
-	box-sizing:border-box;	
+	box-sizing:border-box;
 	width: 33.333%;
 	height: 100%;
 	float:left;
@@ -58,7 +58,7 @@ div {
 }
 
 .control{
-	box-sizing:border-box;	
+	box-sizing:border-box;
 	/*border: 1px solid #00ffff;*/
 	width:100%;
 	height: 20%;
@@ -103,7 +103,7 @@ figure {
 	/*border: 1px dashed #FF0000;*/
 }
 
-.ringselection { 
+.ringselection {
 	position: relative;
 	width: 995px; /* 1024 - 5 margin*/
 	height: 50px;
@@ -111,7 +111,7 @@ figure {
 	border-radius: 0px;
 	/*background-color: #CCCCCC;*/
 	margin-left: 5px;
-	
+
 }
 
 .Chainring {
@@ -159,7 +159,7 @@ figure {
 	cursor:inherit;
 	font-weight: bold;
 	font-size: 120%;
-	text-align: center;	
+	text-align: center;
 	background-color: transparent;
 	/*text-shadow: 3px 3px 4px #777;*/
 }
@@ -175,7 +175,7 @@ figure {
 	cursor:inherit;
 	font-weight: bold;
 	font-size: 120%;
-	text-align: center;	
+	text-align: center;
 	background-color: transparent;
 	/*text-shadow: 3px 3px 4px #777;*/
 }
@@ -205,7 +205,7 @@ figure {
 /*#cadenceSlider {
 	position: relative;
 	width: 100px;
-	height: 14px;	
+	height: 14px;
 }*/
 
 .threeColumns{
@@ -252,6 +252,18 @@ label{
 }
 
 #cadenceValue{
+    padding: 0 0 0 55px;
+}
+#cadencedValue{
+    padding: 0 0 0 55px;
+}
+#cross_minValue{
+    padding: 0 0 0 55px;
+}
+#cross_maxValue{
+    padding: 0 0 0 55px;
+}
+#cross_sValue{
     padding: 0 0 0 55px;
 }
 #chainAngleValue{
@@ -399,7 +411,7 @@ button:click {
 #ribbon2{
     line-height:20px;
     font-size:12px;
-} 
+}
 #close_ribbon{
     position: relative;
     width: 24px;

@@ -3,7 +3,7 @@ var nMaxChainringTeeth = 64;
 var nMinChainringTeeth = 20;
 var nSelectableChainrings = nMaxChainringTeeth - nMinChainringTeeth;
 var nMaxNumberChainrings = 3;
-	
+
 var nMaxSprocketTeeth = 50;
 var nMinSprocketTeeth = 9;
 var nSelectableSprockets = nMaxSprocketTeeth - nMinSprocketTeeth;
@@ -39,9 +39,13 @@ var tireTypes =[];
 var circumference = "2240";
 var circumference2 = "2240";
 var cadence = 90;
+var cadenced = 5;
+var cross_min = 2.5;
+var cross_max = 14;
+var cross_s = 3;
 
-//distance/mm between sprockets 
-var distSprockets = [5.5, 5.5, 5.5, 5.5, 5.3, 5.0, 5.0, 4.8, 4.34, 3.95, 3.9, 3.5]; 
+//distance/mm between sprockets
+var distSprockets = [5.5, 5.5, 5.5, 5.5, 5.3, 5.0, 5.0, 4.8, 4.34, 3.95, 3.9, 3.5];
 var distChainrings = 5.0;
 
 // object for storing display options:
@@ -52,10 +56,10 @@ var c2visible = false;
 var c2active = false;
 
 var GearSet = function( aCWs, aSPs, circumference, hubType){
-	
+
 	this.circumference = circumference;
 	this.hubType = hubType;
-	
+
 	this.Chainrings = [];
 	for (var ic = 0; ic < aCWs.length; ic++) {
 		if (aCWs[ic] > 0){
@@ -66,17 +70,17 @@ var GearSet = function( aCWs, aSPs, circumference, hubType){
 	this.Cogs = [];
 	for (ic = 0; ic < aSPs.length; ic++){
 		if( aSPs[ic] > 0) {
-			this.Cogs.push(aSPs[ic]);			
+			this.Cogs.push(aSPs[ic]);
 		}
 	}
-	
-	// get data from Hub gears if 
+
+	// get data from Hub gears if
 	// hubData = "RLSH,2.1,42,16,0.279,0.316,0.360,0.409,0.464,0.528,0.600,0.682,0.774,0.881,1.000,1.135,1.292,1.467"
 	this.HubGears = [];
 	if (hubType.id !== "DERS"){
 		// old: this.HubGears = hubData.slice(4, hubData.length);
 		this.HubGears = hubType.ratios;
-		this.isGearHub = true;		
+		this.isGearHub = true;
 	} else {
 		this.HubGears = [1.0];
 		this.isGearHub = false;
@@ -112,8 +116,8 @@ function getURLParameter(name) {
 }
 
 function createURL(gearSet, gearSet2, cadence, dsplOps){
-    var url = location.origin + location.pathname + "?GR=" + gearSet.GearType + "&KB=" + gearSet.Chainrings +"&RZ=" + gearSet.Cogs + "&UF=" + gearSet.circumference 
-        + "&TF=" + cadence + "&SL=" + dsplOps.maxChainAngle + "&UN=" + ((dsplOps.siUnits)?"KMH":"MPH"); 
+    var url = location.origin + location.pathname + "?GR=" + gearSet.GearType + "&KB=" + gearSet.Chainrings +"&RZ=" + gearSet.Cogs + "&UF=" + gearSet.circumference
+        + "&TF=" + cadence + "&SL=" + dsplOps.maxChainAngle + "&UN=" + ((dsplOps.siUnits)?"KMH":"MPH");
     if ( c2visible ) {
         url = url + "&GR2=" + gearSet2.GearType + "&KB2=" + gearSet2.Chainrings + "&RZ2=" + gearSet2.Cogs + "&UF2=" + gearSet2.circumference;
     }
@@ -125,29 +129,29 @@ function drawBothGraphics(canvas, canvas2, gearSet, gearSet2, cadence, dsplOps) 
 
 	var minDev = Math.min(gearSet.minDev, gearSet2.minDev);
 	var maxDev = Math.max(gearSet.maxDev, gearSet2.maxDev);
-	
-	drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps);			 
+
+	drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps);
 	drawGraphics(canvas2, gearSet2, minDev, maxDev, cadence, dsplOps);
 }
 
 // update the graphics based on the current parameters
 function updateGraphics(canvas, canvas2, gearSet, gearSet2){
 	if (canvas.getContext){
-		if(c2visible && canvas2.getContext){					
+		if(c2visible && canvas2.getContext){
 			var minDev = Math.min(gearSet.minDev, gearSet2.minDev);
         	var maxDev = Math.max(gearSet.maxDev, gearSet2.maxDev);
-        	drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps);			 
+        	drawGraphics(canvas, gearSet, minDev, maxDev, cadence, dsplOps);
         	drawGraphics(canvas2, gearSet2, minDev, maxDev, cadence, dsplOps);
 		} else {
-            drawGraphics(canvas, gearSet, gearSet.minDev, gearSet.maxDev, cadence, dsplOps);			 
-		}			 
+            drawGraphics(canvas, gearSet, gearSet.minDev, gearSet.maxDev, cadence, dsplOps);
+		}
 	}
 }
 
 
-// Document ready for initializing the screen and defining the event handlers using jQuery 
-$(document).ready( function() {	
-	
+// Document ready for initializing the screen and defining the event handlers using jQuery
+$(document).ready( function() {
+
     var aChainrings = ["00", "22", "36"];
     var aSprockets = ["00","00","11", "12", "14", "16", "18", "21", "24", "28", "32", "36"];
     var aChainrings2 = ["00", "22", "36"];
@@ -156,7 +160,7 @@ $(document).ready( function() {
     var aCopySprockets = ["00","00","11", "12", "14", "16", "18", "21", "24", "28", "32", "36"];
     var aCopyChainrings2 = ["00", "22", "36"];
     var aCopySprockets2 = ["00","00","11", "12", "14", "16", "18", "21", "24", "28", "32", "36"];
-    
+
     var gearSet = {};
     var gearSet2 = {};
 
@@ -238,7 +242,7 @@ $(document).ready( function() {
 					//define array with description and data of hub types from json file
 					var data = val[i].data.split(',');
 					var ratios = data.slice(3,data.length);
-					var hub = { id:val[i].id.toString(), minRatio:data.slice(0,1).toString(), chainRing:data.slice(1,2).toString(), 
+					var hub = { id:val[i].id.toString(), minRatio:data.slice(0,1).toString(), chainRing:data.slice(1,2).toString(),
 					    sprocket:data.slice(2,3).toString(), ratios:ratios, name:val[i].name};
 					hubTypes[hubTypes.length] = hub;
 					//console.log('<option value="' + val[i].id + ',' + val[i].data + '">' + val[i].name + '</option>');
@@ -246,7 +250,7 @@ $(document).ready( function() {
 			}
 		});
 
-	}); 
+	});
 
 	// get Chainrings and Sprockets from URL
 	// example: http://www.gear-calculator.com?KB=39,53&RZ=12,13,14,15,16,17,18,19,21,23&GR=DERS&TF=85&UF=2099&SL=2
@@ -262,7 +266,7 @@ $(document).ready( function() {
 	var paramUF2 = getURLParameter("UF2");
 	var paramGR2 = getURLParameter("GR2");
 	var paramGT2 = getURLParameter("GT2");
-	
+
 	if ( paramKB !== null && paramRZ !== null ){
 	    aChainrings = paramKB.split(',');
 	    aChainrings.sort();
@@ -292,7 +296,7 @@ $(document).ready( function() {
 	cadence = Number(( paramTF !== null )? paramTF : cadence);
 	circumference = ( paramUF !== null )? paramUF : circumference;
 	circumference2 = ( paramUF2 !== null )? paramUF2 : circumference;
-	dsplOps.siUnits = (paramUN !== null)? (paramUN === "KMH") : (navigator.language !== "en"); 
+	dsplOps.siUnits = (paramUN !== null)? (paramUN === "KMH") : (navigator.language !== "en");
 	dsplOps.maxChainAngle = Number(( paramSL !== null )? paramSL : dsplOps.maxChainAngle);
 	hubType = ( paramGR !== null )? hubTypes.getById(paramGR) : hubTypes[0];
 	hubType2 = ( paramGR2 !== null )? hubTypes.getById(paramGR2) : hubTypes[0];
@@ -312,7 +316,7 @@ $(document).ready( function() {
 	$("body").css("height", window.innerHeight - 16);
 
 	function positionChainrings(chainrings, animate){
-		//position Chainrings/Sprockets and place empty Chainrings/sprockets to position left=0 
+		//position Chainrings/Sprockets and place empty Chainrings/sprockets to position left=0
 		for ( var i = 1; i <= chainrings.length; i++) {
 			var animation = {};
 			animation.left = (chainrings[i-1]>0)? Math.round((chainrings[i-1]-nMinChainringTeeth)*scaleWidth/nSelectableChainrings + scaleLeft -25 ) : 0 ;
@@ -323,7 +327,7 @@ $(document).ready( function() {
 			}
 			$(".Chainring:nth-child(" + i + ")").children("div").html( (chainrings[i-1]>0)? chainrings[i-1]:null);
 		}
-	}	
+	}
 
 	function positionSprockets(sprockets, animate){
 		for ( var i = 1; i <= sprockets.length; i++) {
@@ -340,15 +344,82 @@ $(document).ready( function() {
 
 	// make the Chainrings movable
 	$(".Chainring").draggable({ axis: "x", containment: "parent" });
+	// create Slider for cadence selection
+	$( "#cadenceSlider" ).slider({ min: 40 , max: 140, step: 1});
+	$( "#cadenceSlider" ).slider( "value", cadence);
+	$( "#cadenceValue" ).html( cadence );
+	$( "#cross_minSlider" ).slider({ min: 1 , max: 100, step: 0.1});
+	$( "#cross_minSlider" ).slider( "value", cross_min);
+	$( "#cross_minValue" ).html( cross_min );
+	$( "#cross_maxSlider" ).slider({ min: 1 , max: 100, step: 0.1});
+	$( "#cross_maxSlider" ).slider( "value", cross_max);
+	$( "#cross_maxValue" ).html( cross_max );
+	$( "#cross_sSlider" ).slider({ min: 1 , max: 6, step: 1});
+	$( "#cross_sSlider" ).slider( "value", cross_s);
+	$( "#cross_sValue" ).html( cross_s );
+	$( "#cadencedSlider" ).slider({ min: 1 , max: 20, step: 1});
+	$( "#cadencedSlider" ).slider( "value", cadenced);
+	$( "#cadencedValue" ).html( cadenced );
+		// event handler for cadence slider
+	$("#cadenceSlider").on( "slide", function( event, ui ) {
+			//console.log($("#slider").slider("value"));
+			cadence = ui.value;
+				//cadence = $("#cadenceSlider").slider("value");
+				$("#cadenceValue").html( cadence );
+		var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
+		var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
+				updateGraphics(canvas, canvas2, gearSet, gearSet2);
+		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
+		});
 
+		$("#cadencedSlider").on( "slide", function( event, ui ) {
+				//console.log($("#slider").slider("value"));
+				cadenced = ui.value;
+					//cadence = $("#cadenceSlider").slider("value");
+					$("#cadencedValue").html( cadenced );
+			var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
+			var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
+					updateGraphics(canvas, canvas2, gearSet, gearSet2);
+			$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
+			});
+			$("#cross_minSlider").on( "slide", function( event, ui ) {
+					//console.log($("#slider").slider("value"));
+					cross_min = ui.value;
+						//cadence = $("#cadenceSlider").slider("value");
+						$("#cross_minValue").html( cross_min );
+				var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
+				var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
+						updateGraphics(canvas, canvas2, gearSet, gearSet2);
+				$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
+				});
+				$("#cross_maxSlider").on( "slide", function( event, ui ) {
+						//console.log($("#slider").slider("value"));
+						cross_max = ui.value;
+							//cadence = $("#cadenceSlider").slider("value");
+							$("#cross_maxValue").html( cross_max );
+					var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
+					var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
+							updateGraphics(canvas, canvas2, gearSet, gearSet2);
+					$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
+					});
+					$("#cross_sSlider").on( "slide", function( event, ui ) {
+							//console.log($("#slider").slider("value"));
+							cross_s = ui.value;
+								//cadence = $("#cadenceSlider").slider("value");
+								$("#cross_sValue").html( cross_s );
+						var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
+						var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
+								updateGraphics(canvas, canvas2, gearSet, gearSet2);
+						$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
+						});
 	// draw graphics in canvas element
 	var canvas = $("#myCanvas")[0]; //[0] gets the first element from the selector's collection
 	if (canvas.getContext){
-		// take width and height for canvas area from CSS for #myCanvas 
-		canvas.width = parseInt($("#myCanvas").css("width"),10);	 
-		canvas.height = parseInt($("#myCanvas").css("height"),10);	 
+		// take width and height for canvas area from CSS for #myCanvas
+		canvas.width = parseInt($("#myCanvas").css("width"),10);
+		canvas.height = parseInt($("#myCanvas").css("height"),10);
 		gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
-		drawGraphics(canvas, gearSet, gearSet.minDev, gearSet.maxDev, cadence, dsplOps);			 
+		drawGraphics(canvas, gearSet, gearSet.minDev, gearSet.maxDev, cadence, dsplOps);
 	    // position first set of Chainrings and Sprockets
 	    positionChainrings(aChainrings, true);
 	    positionSprockets(aSprockets, true);
@@ -357,10 +428,10 @@ $(document).ready( function() {
 		// draw second canvas
 		canvas2 = $("#myCanvas2")[0];
 		if (canvas2.getContext){
-		// take width and height for canvas area from CSS for #myCanvas 
-			canvas2.width = parseInt($("#myCanvas").css("width"), 10);	 
+		// take width and height for canvas area from CSS for #myCanvas
+			canvas2.width = parseInt($("#myCanvas").css("width"), 10);
 			canvas2.height = parseInt($("#myCanvas").css("height"),10);
-			gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);	 
+			gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
 			drawBothGraphics(canvas, canvas2, gearSet, gearSet2, cadence, dsplOps);
 		}
 		// display canvas2 and scroll it down
@@ -374,7 +445,7 @@ $(document).ready( function() {
 	}
     $("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
 
-		
+
 	// event handler while dragging a Chainring
 	var oldTick = 0;
 	$(".Chainring").on( "drag", function( event, ui ) {
@@ -404,8 +475,8 @@ $(document).ready( function() {
 			}
 			var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
 			var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-            updateGraphics(canvas, canvas2, gearSet, gearSet2);			
-            // set Select Box according to current Chainrings			
+            updateGraphics(canvas, canvas2, gearSet, gearSet2);
+            // set Select Box according to current Chainrings
 			$('#selectBoxChainrings').val(((!c2active)? aChainrings.slice(0) : aChainrings2.slice(0)).sort().toString());
 		    $("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
 		}
@@ -425,7 +496,7 @@ $(document).ready( function() {
 			$(this).children("div").html( "" );
 		}
 	});
-	
+
 	// make the Sprockets movable
 	$(".sprocket").draggable({ axis: "x", containment: "parent" });
 
@@ -455,8 +526,8 @@ $(document).ready( function() {
 			}
 			var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
 			var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-            updateGraphics(canvas, canvas2, gearSet, gearSet2);			
-			// set Select Box according to current Sprockets			
+            updateGraphics(canvas, canvas2, gearSet, gearSet2);
+			// set Select Box according to current Sprockets
 			$('#selectBoxSprockets').val(((!c2active)? aSprockets.slice(0) : aSprockets2.slice(0)).sort().toString());
 		    $("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
 		}
@@ -482,7 +553,7 @@ $(document).ready( function() {
 		c2active = true;
 		positionChainrings(aChainrings2);
 		positionSprockets(aSprockets2);
-		$(this).css('outline', '2px solid #f06529');		
+		$(this).css('outline', '2px solid #f06529');
 		$("#myCanvas").css('outline', 'none');
  	    $('#selectBoxGearingType').val( hubType2.id );
  	    $('#selectWheelSize').val(circumference2);
@@ -490,34 +561,34 @@ $(document).ready( function() {
 		$('#selectBoxChainrings').val((aChainrings2.slice(0)).sort().toString());
 		$('#selectBoxSprockets').val((aSprockets2.slice(0)).sort().toString());
 		if (gearSet2.isGearHub){
-   				$("#selectBoxChainrings").prop('disabled', 'disabled');    		
-   				$("#selectBoxSprockets").prop('disabled', 'disabled');    					
+   				$("#selectBoxChainrings").prop('disabled', 'disabled');
+   				$("#selectBoxSprockets").prop('disabled', 'disabled');
 		} else {
-   				$("#selectBoxChainrings").prop('disabled', false);    		
-   				$("#selectBoxSprockets").prop('disabled', false);    		
-		}		
+   				$("#selectBoxChainrings").prop('disabled', false);
+   				$("#selectBoxSprockets").prop('disabled', false);
+		}
 	});
-	
+
 	$("#myCanvas").click( function(){
 		c2active = false;
 		positionChainrings(aChainrings);
-		positionSprockets(aSprockets);		
+		positionSprockets(aSprockets);
  	    $('#selectBoxGearingType').val( hubType.id );
  	    $('#selectWheelSize').val(circumference);
     	$('#inputCircumference').val(circumference);
 		$('#selectBoxChainrings').val((aChainrings.slice(0)).sort().toString());
 		$('#selectBoxSprockets').val((aSprockets.slice(0)).sort().toString());
 		if (c2visible){
-			$(this).css('outline', '2px solid #f06529');		
-		    $("#myCanvas2").css('outline', 'none');	
+			$(this).css('outline', '2px solid #f06529');
+		    $("#myCanvas2").css('outline', 'none');
 		}
 		if (gearSet.isGearHub){
-   				$("#selectBoxChainrings").prop('disabled', 'disabled');    		
-   				$("#selectBoxSprockets").prop('disabled', 'disabled');    					
+   				$("#selectBoxChainrings").prop('disabled', 'disabled');
+   				$("#selectBoxSprockets").prop('disabled', 'disabled');
 		} else {
-   				$("#selectBoxChainrings").prop('disabled', false);    		
-   				$("#selectBoxSprockets").prop('disabled', false);    		
-		}		
+   				$("#selectBoxChainrings").prop('disabled', false);
+   				$("#selectBoxSprockets").prop('disabled', false);
+		}
 	});
 
 
@@ -530,11 +601,11 @@ $(document).ready( function() {
 			// draw second canvas
 			canvas2 = $("#myCanvas2")[0];
 			if (canvas2.getContext){
-			// take width and height for canvas area from CSS for #myCanvas 
-				canvas2.width = parseInt($("#myCanvas").css("width"), 10);	 
+			// take width and height for canvas area from CSS for #myCanvas
+				canvas2.width = parseInt($("#myCanvas").css("width"), 10);
 				canvas2.height = parseInt($("#myCanvas").css("height"),10);
-				gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType );	 
-				gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);	 
+				gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType );
+				gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
 				drawBothGraphics(canvas, canvas2, gearSet, gearSet2, cadence, dsplOps);
 			}
 			// display canvas2 and scroll it down
@@ -552,9 +623,9 @@ $(document).ready( function() {
 		        hubType = hubType2;
 			    var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
 			    var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-                updateGraphics(canvas, canvas2, gearSet, gearSet2);			
+                updateGraphics(canvas, canvas2, gearSet, gearSet2);
 		    }else{
-		        
+
 		    }
 			// scroll up Canvas2 and hide it
 			$("#myCanvas2").animate( {top: -240}, function(){$("#myCanvas2").hide();});
@@ -567,8 +638,8 @@ $(document).ready( function() {
 		//$("#inputURL").val( createURL(new GearSet(aChainrings, aSprockets, circumference, hubType), new GearSet(aChainrings2, aSprockets2, circumference, hubType2), cadence, dsplOps));
  		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
    });
-	
- 
+
+
 	$('#selectBoxGearingType').change(function(){
 		if (c2active){
             hubType2 = hubTypes.getById($('#selectBoxGearingType option:selected').val());
@@ -585,15 +656,15 @@ $(document).ready( function() {
     			}
     			positionChainrings(aChainrings2);
     			positionSprockets(aSprockets2);
-  				$("#selectBoxChainrings").prop('disabled', 'disabled');    		
-    			$("#selectBoxSprockets").prop('disabled', 'disabled');    		
+  				$("#selectBoxChainrings").prop('disabled', 'disabled');
+    			$("#selectBoxSprockets").prop('disabled', 'disabled');
 	    	    $('#selectBoxSprockets').val("");
 	    	    $('#selectBoxChainrings').val("");
     		} else {
     			aChainrings2 = aCopyChainrings2.slice(0);
     			aSprockets2= aCopySprockets2.slice(0);
-   				$("#selectBoxChainrings").prop('disabled', false);    		
-   				$("#selectBoxSprockets").prop('disabled', false);    		
+   				$("#selectBoxChainrings").prop('disabled', false);
+   				$("#selectBoxSprockets").prop('disabled', false);
 	    	    $('#selectBoxSprockets').val(aSprockets2.toString());
 	    	    $('#selectBoxChainrings').val(aChainrings2.toString());
     			positionChainrings(aChainrings2);
@@ -615,29 +686,29 @@ $(document).ready( function() {
     			}
     			positionChainrings(aChainrings);
     			positionSprockets(aSprockets);
-   				$("#selectBoxChainrings").prop('disabled', 'disabled');    		
-    			$("#selectBoxSprockets").prop('disabled', 'disabled');    		
+   				$("#selectBoxChainrings").prop('disabled', 'disabled');
+    			$("#selectBoxSprockets").prop('disabled', 'disabled');
 	    	    $('#selectBoxSprockets').val("");
 	    	    $('#selectBoxChainrings').val("");
     		} else {
     			aChainrings = aCopyChainrings.slice(0);
     			aSprockets = aCopySprockets.slice(0);
-   				$("#selectBoxChainrings").prop('disabled', false);    		
-   				$("#selectBoxSprockets").prop('disabled', false);   
+   				$("#selectBoxChainrings").prop('disabled', false);
+   				$("#selectBoxSprockets").prop('disabled', false);
 	    	    $('#selectBoxSprockets').val(aSprockets.toString());
 	    	    $('#selectBoxChainrings').val(aChainrings.toString());
     			positionChainrings(aChainrings);
     			positionSprockets(aSprockets);
-   			} 		
+   			}
       	}
-      	
+
 		var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
 		var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-        updateGraphics(canvas, canvas2, gearSet, gearSet2);			
+        updateGraphics(canvas, canvas2, gearSet, gearSet2);
 		//positionSprockets(aSprockets);
 		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
     });
-   
+
 
 	$('#selectBoxSprockets').change(function(){
 		if (c2active) {
@@ -647,11 +718,11 @@ $(document).ready( function() {
     	}
 		var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
 		var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-        updateGraphics(canvas, canvas2, gearSet, gearSet2);			
+        updateGraphics(canvas, canvas2, gearSet, gearSet2);
 		positionSprockets((c2active)?aSprockets2:aSprockets, true);
  		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
    });
- 
+
  	$('#selectBoxChainrings').change(function(){
  		if (c2active) {
 	    	aChainrings2   = $('#selectBoxChainrings option:selected').val().split(',') ;
@@ -660,7 +731,7 @@ $(document).ready( function() {
 	    }
 		var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
 		var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-        updateGraphics(canvas, canvas2, gearSet, gearSet2);			
+        updateGraphics(canvas, canvas2, gearSet, gearSet2);
 		positionChainrings((c2active)?aChainrings2:aChainrings, true);
 		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
     });
@@ -675,7 +746,7 @@ $(document).ready( function() {
  		}
 		var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
 		var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-        updateGraphics(canvas, canvas2, gearSet, gearSet2);			
+        updateGraphics(canvas, canvas2, gearSet, gearSet2);
 		//positionChainrings(aChainrings);
  		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
    });
@@ -690,7 +761,7 @@ $(document).ready( function() {
  		}
 		var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
 		var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-        updateGraphics(canvas, canvas2, gearSet, gearSet2);			
+        updateGraphics(canvas, canvas2, gearSet, gearSet2);
  		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
     });
 
@@ -699,38 +770,22 @@ $(document).ready( function() {
     	dsplOps.values = $('#displaySelect option:selected').val();
 		var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
 		var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-        updateGraphics(canvas, canvas2, gearSet, gearSet2);			
+        updateGraphics(canvas, canvas2, gearSet, gearSet2);
     });
-       
+
     $( "input[name=units]:radio" ).change(function(){
         dsplOps.siUnits = ($("input[name=units]:checked").val() === 'kmh');
 		var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
 		var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference, hubType2);
-        updateGraphics(canvas, canvas2, gearSet, gearSet2);			
-		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
-    });
-
- 	// create Slider for cadence selection
- 	$( "#cadenceSlider" ).slider({ min: 40 , max: 140, step: 1});
-    $( "#cadenceSlider" ).slider( "value", cadence);
-	$( "#cadenceValue" ).html( cadence );
-    // event handler for cadence slider
-	$("#cadenceSlider").on( "slide", function( event, ui ) {
-    	//console.log($("#slider").slider("value"));
-    	cadence = ui.value;
-        //cadence = $("#cadenceSlider").slider("value");
-        $("#cadenceValue").html( cadence );
-		var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
-		var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-        updateGraphics(canvas, canvas2, gearSet, gearSet2);			
+        updateGraphics(canvas, canvas2, gearSet, gearSet2);
 		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
     });
 
 	$("#close_ribbon").click( function(){
         $("#ribbon-banner").hide();
 	});
-	
-	//create slider for max allowed chain angle 
+
+	//create slider for max allowed chain angle
     $( "#chainLineSlider" ).slider({ min: 1.50 , max: 3.50, step: 0.1 });
     $( "#chainLineSlider" ).slider( "value", dsplOps.maxChainAngle);
 	$( "#chainAngleValue" ).html( dsplOps.maxChainAngle.toPrecision(2) +'&deg;');
@@ -742,7 +797,7 @@ $(document).ready( function() {
     	$( "#chainAngleValue" ).html( dsplOps.maxChainAngle.toPrecision(2) +'&deg;' );
 		var gearSet = new GearSet(aChainrings, aSprockets, circumference, hubType);
 		var gearSet2 = new GearSet(aChainrings2, aSprockets2, circumference2, hubType2);
-        updateGraphics(canvas, canvas2, gearSet, gearSet2);			
+        updateGraphics(canvas, canvas2, gearSet, gearSet2);
 		$("#inputURL").val( createURL(gearSet, gearSet2, cadence, dsplOps));
     });
 

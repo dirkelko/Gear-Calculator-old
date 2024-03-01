@@ -7,12 +7,12 @@
     <meta name="keywords" content="Ritzelrechner, Entfaltungsrechner,gear calculator,bicycle">
     <meta name="description" content="Graphical gear calculator for bicycle gearing systems. Includes derailleur gears and internal gear hubs.
     Grafischer Ritzelrechner zur Berechnung der Entfaltung von Fahrradschaltungen.">
-    <meta property="og:title" content="Graphical Gear Calculator for Bicycles" />    
+    <meta property="og:title" content="Graphical Gear Calculator for Bicycles" />
     <meta property="og:description"
-    content="The bicycle gear calculator displays graphically the gearing of derailleur gears and gear hubs. 
+    content="The bicycle gear calculator displays graphically the gearing of derailleur gears and gear hubs.
     It can be used to compare different setups to find the optimal gearing for all kinds of bicycles." />
-    <meta property="og:site_name" content="Bicycle Gear Calculator"/>    
-    <meta property="og:url" content="http://www.gear-calculator.com" />    
+    <meta property="og:site_name" content="Bicycle Gear Calculator"/>
+    <meta property="og:url" content="http://www.gear-calculator.com" />
     <meta property="og:image" content="http://www.gear-calculator.com/images/gearcalc.jpg" />
     <title>Bicycle Gear Calculator</title>
 	<link rel="icon" href="/favicon.png" type="image/png">
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="graphics.js"></script>
     <script type="text/javascript" src="script.js"></script>
 </head>
- 
+
 <body>
 	<div  id="outerFrame" class="frame">
         <div id="ribbon-banner">
@@ -45,7 +45,7 @@
         	<canvas id="myCanvas2" height="240px"></canvas>
     	</figure>
  	</div>
- 	
+
  	<div id="controlArea" class="outerArea">
  		<div id="cwselection" class="ringselection">
     		<div class="Chainring" id="cw1"><div class="nTeeth"> </div></div>
@@ -69,7 +69,7 @@
     		<div id="spScale" class="scale"> </div>
         </div>
  	</div>
- 
+
     <div id="calcControls" class="outerArea">
         <div id="column1" class="threeColumns">
 			<div id="GearingTypeSelect" class="control">
@@ -92,6 +92,10 @@
 					<!-- will be filled by data from data.json -->
 				</select>
 			</div>
+      <div id="cross_min" class="control">
+        <label id="l_cross_min">Min cross</label><label id="cross_minValue"></label>
+        <div id="cross_minSlider" class="slider"> </div>
+      </div>
 		</div><div id="column2" class="threeColumns">
 			<div id="ringDropDownArea2" class="control">
 				<!-- h4>DropDowns2</h4-->
@@ -110,6 +114,7 @@
                     <option id="o_gear_inches" value="gear_inches">Gear Inches</option>
                     <option id="o_ratio" value="ratio">Ratio</option>
                     <option id="o_speed" value="speed">Speed</option>
+		                <option id="o_speed_c" value="speed-c">Speed +/- cadence</option>
 				</select>
 			</div>
 			<div id="radioButtonArea" class="control">
@@ -121,17 +126,31 @@
                     <label for="unitMph">mph</label>
                 </div>
             </div>
+
+                  <div id="cross_max" class="control">
+                    <label id="l_cross_max">Max cross</label><label id="cross_maxValue"></label>
+                    <div id="cross_maxSlider" class="slider"> </div>
+                  </div>
 		</div><div id="column3" class="threeColumns">
 			<div id ="cadenceSliderArea" class="control">
 				<!-- h4> Cadence </h4-->
 				<label id="l_cadence">Cadence</label><label id="cadenceValue"></label>
 				<div id="cadenceSlider" class="slider"> </div>
 			</div>
+      <div id ="cadencedSliderArea" class="control">
+				<!-- h4> Cadence </h4-->
+				<label id="l_cadenced">Deviation</label><label id="cadencedValue"></label>
+				<div id="cadencedSlider" class="slider"> </div>
+			</div>
 			<div id="chainLineSliderArea" class="control">
 				<!-- h4> Allowed Chain Angle </h4-->
 				<label id="l_chain_angle">Chain Angle &lt;</label><label id="chainAngleValue"></label>
 				<div id="chainLineSlider" class="slider"> </div>
 			</div>
+      <div id="cross_s" class="control">
+        <label id="l_cross_s">Cross shifts</label><label id="cross_sValue"></label>
+        <div id="cross_sSlider" class="slider"> </div>
+      </div>
 			<div class="control">
                 <button id="buttonCompare" type="Button" class="compButton">
                 Compare two Setups</button>
@@ -143,7 +162,7 @@
 			    <label>URL</label>
 			    <input type="text" id="inputURL" name="url" class="textInput">
 			</div>
-        
+
     </div>
     </div>
  	<div id="footer">
